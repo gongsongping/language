@@ -1,0 +1,48 @@
+<ion-view view-title="Account">
+  <ion-content>
+    <ion-list>
+    <ion-toggle  ng-model="settings.enableFriends">
+        Enable Friends
+    </ion-toggle>
+    </ion-list>
+<div id="exam">
+
+</div>
+
+<div class="row">
+  <div class="large-4 columns">
+    <form method="post" action="/users/upload" enctype="multipart/form-data">
+      <p>content: <input type="text" name="content" /></p>
+      <p>Image: <input type="file" name="image" /></p>
+      <p>Image: <input type="text" name="pic_url" id="pic_url" value="" /></p>
+      <p><input type="submit" value="submit" class="button small" /></p>
+    </form>
+  </div>
+</div>
+
+<div id="container">
+  <a class="button small alert " id="pickfiles" href="#" >
+    <sapn>选择文件</sapn>
+  </a>
+</div>
+<div style="display:none" id="success" class="col-md-12">
+  <div class="alert-success">
+    队列全部文件处理完毕
+  </div>
+</div>
+<div class="row ">
+  <table class="table table-striped table-hover text-left"   style="margin-top:40px;display:none">
+    <thead>
+      <tr>
+        <th class="large-4 columns">Filename</th>
+        <th class="large-2 columns">Size</th>
+        <th class="large-6 columns">Detail</th>
+      </tr>
+    </thead>
+    <tbody id="fsUploadProgress">
+    </tbody>
+  </table>
+</div>
+
+</ion-content>
+</ion-view>

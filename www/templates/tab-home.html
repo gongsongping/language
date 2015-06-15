@@ -1,0 +1,67 @@
+<ion-view view-title="Chats">
+  <ion-content>
+    <!-- <ion-list>
+    <ion-item class="item-remove-animate item-avatar item-icon-right"  ng-repeat="p in posts"  item-height="200px" type="item-text-wrap" href="#/tab/chats/{{p.id}}">
+
+    <h2>{{p.title}}</h2>
+    <p>{{p.content}}</p>
+    <a class="item item-thumbnail-left" href="#">
+    <img src="http://localhost:8000/uploads/micropost/picture/{{p.id}}/{{p.picture}}">
+  </a>
+  <i class="icon ion-chevron-right icon-accessory"></i>
+  <ion-option-button class="button-assertive" ng-click="remove(chat)">
+  Delete
+</ion-option-button>
+</ion-item>
+</ion-list> -->
+<ion-refresher
+pulling-text="Pull to refresh..."
+on-refresh="doRefresh()">
+</ion-refresher>
+<div style="margin-top:10px;">
+<form  ng-submit="makePost()" id="pform">
+    <label class="item item-input">
+      <textarea ng-model="post.content"  cols="5" rows="5"></textarea>
+    </label>
+    <!-- <label class="checkbox">
+      <input type="checkbox" ng-model="post.hidepo" >hide the post 隐藏博客
+    </label> -->
+    <label class="toggle toggle-assertive" style="margin-top:5px; margin-left:15px;">
+       <input type="checkbox" ng-model="post.hidepo">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+       hide the post 隐藏博客
+    </label>
+    <!-- <input type="file" ngf-select ngf-change="upload($files)" ngf-change="keepFile($files)" style="margin-top:7px; margin-left:5px;"> -->
+    <label class="item item-input">
+    <img id="img" ngf-src="files[0]" height="30" width="30">
+    <!-- <input type="file" ngf-capture="'camera'" ngf-select ngf-change="upload($files)"  style="margin-top:7px; margin-left:5px;"> -->
+    <input type="file" ngf-select ng-model="files" ngf-change="keepFile($files)" id="imgInput" class="button button-balanced button-small" style="margin-top:7px; margin-left:5px;">
+    </label>
+    <!-- <label class="item "> -->
+    <input style="margin-top:7px; margin-left:15px;" type="submit"  value="submit" class="button button-calm button-small">
+    <!-- </label> -->
+  <!-- <div> {{post}}</div> -->
+</form>
+</div>
+<div class="card" ng-repeat="p in posts">
+  <a href="#/tab/posts/{{p.id}}">
+    <div class="item item-divider">
+    </div>
+    <div class="{{p.hidepo}} item item-text-wrap">
+      <p>{{p.content}}</p>
+      <img src="{{p.picture.url}}" height="200" width="200" ng-show="'{{p.picture.url}}'">
+    </div>
+    <!-- <div class="item item-divider">
+    I'm a Footer in a Card!
+  </div> -->
+</a>
+</div>
+</ion-content>
+</ion-view>
+<style media="screen">
+  .true {
+    background-color: #C4F9FF;
+  }
+</style>

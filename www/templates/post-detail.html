@@ -1,0 +1,29 @@
+<!--
+This template loads for the 'tab.friend-detail' state (app.js)
+'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+The FriendsCtrl pulls data from the Friends service (service.js)
+The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{post.title}}">
+  <ion-content class="padding">
+    <p>
+      {{post.content}}
+    </p>
+    <!-- <img ng-src="http://localhost:8000{{post.picture.url}}" style="width:128px;height:128px;"> -->
+    <!-- <div ng-if="showPic"> -->
+    <!-- <div ng-if="'{{post.picture.url}}'">   -->
+      <img ng-src="{{post.picture.url}}" height="400" width="400" >
+    <!-- </div> -->
+    <div style="margin-top:10px;">
+      <form ng-submit="makeComment()">
+          <label class="item item-input">
+            <textarea ng-model="comment.content" cols="5" rows="5"></textarea>
+          </label>
+          <label class="item ">
+            <input type="submit" value="comment" class="button button-calm">
+          </label>
+        <div> {{comment}}</div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>
