@@ -5,11 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, $http, $window, $rootScope) {
   // AV.initialize("2sgwr9lae382ysns89oau0o8tx76fylyna5dqhp21vyi8iy5", "g88pb2mf8s75e2iel5jgnlfwwyfbng38dd079xevfzg3t4n3");
-  $rootScope.baseUrl = "http://localhost:8000"
+  $rootScope.baseUrl = "http://localhost:3000"
 
   // $rootScope.baseUrl = "http://104.131.150.241"
   console.log($window.localStorage['currentUser'])
@@ -72,12 +72,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.write', {
+    url: '/write',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-write': {
+        templateUrl: 'templates/tab-write.html',
+        controller: 'WriteCtrl'
       }
     }
   })

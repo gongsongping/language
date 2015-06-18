@@ -1,0 +1,66 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+    <div style="margin-top:10px;">
+      <form  ng-submit="sendPost()" id="pform">
+        <div class="list">
+          <label class="item item-input">
+            <textarea ng-model="post.content" placeholder="write something" cols="5" rows="5"></textarea>
+          </label>
+          <ion-toggle  ng-model="post.hidepo">
+            hide the post 隐藏博客
+          </ion-toggle>
+          <input  type="submit"  value="submit" class="button button-calm button-block">
+        </div>
+      </form>
+    </div>
+
+    <div id="container">
+      <a class="button small alert " id="pickfiles" href="#" >
+        <sapn>选择文件</sapn>
+      </a>
+    </div>
+    <div style="display:none" id="success" class="col-md-12">
+      <div class="alert-success">
+        队列全部文件处理完毕
+      </div>
+    </div>
+    <div class="row ">
+      <table class="table table-striped table-hover text-left"   style="margin-top:40px;display:none">
+        <thead>
+          <tr>
+            <th class="large-4 columns">Filename</th>
+            <th class="large-2 columns">Size</th>
+            <th class="large-6 columns">Detail</th>
+          </tr>
+        </thead>
+        <tbody id="fsUploadProgress">
+        </tbody>
+      </table>
+    </div>
+
+    <!-- <div class="list card">
+      <div class="item item-divider">Recent Updates</div>
+      <div class="item item-body">
+        <div>
+          There is a fire in <b>sector 3</b>
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">Health</div>
+      <div class="item item-body">
+        <div>
+          You ate an apple today!
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">Upcoming</div>
+      <div class="item item-body">
+        <div>
+          You have <b>29</b> meetings on your calendar tomorrow.
+        </div>
+      </div>
+    </div> -->
+  </ion-content>
+</ion-view>

@@ -9,13 +9,14 @@ The Friends service returns an array of friend data
     <p>
       {{post.content}}
     </p>
-    <!-- <img ng-src="http://localhost:8000{{post.picture.url}}" style="width:128px;height:128px;"> -->
-    <!-- <div ng-if="showPic"> -->
-    <!-- <div ng-if="'{{post.picture.url}}'">   -->
-      <img ng-src="{{post.picture.url}}" height="400" width="400" >
-    <!-- </div> -->
+    <div class="card" ng-repeat="c in post.comments">
+      <a href="#/tab/users/{{c.creator}}"> commentor </a>
+      <div class="item item-text-wrap">
+        <p>{{c.content}}</p>
+      </div>
+    </div>
     <div style="margin-top:10px;">
-      <form ng-submit="makeComment()">
+      <form ng-submit="sendComment()">
           <label class="item item-input">
             <textarea ng-model="comment.content" cols="5" rows="5"></textarea>
           </label>
