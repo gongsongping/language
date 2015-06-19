@@ -1,5 +1,16 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['ngResource'])
 
+.factory('Post', function($resource, $rootScope) {
+  return $resource($rootScope.baseUrl + '/api/posts/:id');
+})
+
+.factory('Comment', function($resource, $rootScope) {
+  return $resource($rootScope.baseUrl + '/api/comments/:id');
+})
+
+.factory('Session', function($resource, $rootScope) {
+  return $resource($rootScope.baseUrl + '/api/session/:id');
+})  
 
 .factory('Qiniu', function() {
   // Might use a resource here that returns a JSON array

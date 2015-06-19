@@ -8,16 +8,13 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, $http, $window, $rootScope) {
-  // AV.initialize("2sgwr9lae382ysns89oau0o8tx76fylyna5dqhp21vyi8iy5", "g88pb2mf8s75e2iel5jgnlfwwyfbng38dd079xevfzg3t4n3");
-  $rootScope.baseUrl = "http://localhost:3000"
 
+  $rootScope.baseUrl = "http://localhost:3000"
   // $rootScope.baseUrl = "http://104.131.150.241"
   console.log($window.localStorage['currentUser'])
   if ($window.localStorage['currentUser']) {
     $http.defaults.headers.common["Authorization"] = "Token token=" + $window.localStorage['currentUser'];
-    // $http.defaults.headers.common['Auth-Token'] = 'login YmVlcDpi';
   }
-
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
