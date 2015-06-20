@@ -60,12 +60,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-    .state('tab.post-detail', {
-      url: '/posts/:pId',
+    .state('tab.user-id', {
+      url: '/users/:uId',
+      // cache: false,
       views: {
         'tab-home': {
-          templateUrl: 'templates/post-detail.html',
-          controller: 'PostDetailCtrl'
+          templateUrl: 'templates/user-id.html',
+          controller: 'UserIdCtrl'
+        }
+      }
+    })
+    .state('tab.post-id', {
+      url: '/posts/:pId',
+      cache: false,
+      views: {
+        'tab-home': {
+          templateUrl: 'templates/post-id.html',
+          controller: 'PostIdCtrl'
         }
       }
     })

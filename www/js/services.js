@@ -1,5 +1,9 @@
 angular.module('starter.services', ['ngResource'])
 
+.factory('User', function($resource, $rootScope) {
+  return $resource($rootScope.baseUrl + '/api/users/:id');
+})
+
 .factory('Post', function($resource, $rootScope) {
   return $resource($rootScope.baseUrl + '/api/posts/:id');
 })
@@ -10,7 +14,7 @@ angular.module('starter.services', ['ngResource'])
 
 .factory('Session', function($resource, $rootScope) {
   return $resource($rootScope.baseUrl + '/api/session/:id');
-})  
+})
 
 .factory('Qiniu', function() {
   // Might use a resource here that returns a JSON array
@@ -21,26 +25,6 @@ angular.module('starter.services', ['ngResource'])
     name: 'Ben Sparrow',
     lastText: 'You on your way?',
     face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
-  }, {
-    id: 2,
-    name: 'Andrew Jostlin',
-    lastText: 'Did you get the ice cream?',
-    face: 'https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg'
-  }, {
-    id: 3,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
-  }, {
-    id: 4,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'https://pbs.twimg.com/profile_images/491995398135767040/ie2Z_V6e.jpeg'
   }];
 
   return {
@@ -68,7 +52,7 @@ angular.module('starter.services', ['ngResource'])
             flash_swf_url: 'js/plupload/Moxie.swf',
             dragdrop: true,
             chunk_size: '4mb',
-            uptoken_url: 'http://localhost:8000/sinatra/uptoken',
+            uptoken_url: 'http://localhost:3000/api/uptoken',
             domain: 'http://7xj5ck.com1.z0.glb.clouddn.com/',
             // downtoken_url: '/downtoken',
             unique_names: true,

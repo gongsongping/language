@@ -14,7 +14,7 @@ $(function() {
         flash_swf_url: 'js/plupload/Moxie.swf',
         dragdrop: true,
         chunk_size: '4mb',
-        uptoken_url: 'http://localhost:8000/sinatra/uptoken',
+        uptoken_url: 'http://localhost:3000/api/uptoken',
         domain: 'http://7xj5ck.com1.z0.glb.clouddn.com/',
         // downtoken_url: '/downtoken',
         // unique_names: true,

@@ -72,15 +72,26 @@ angular.module('starter.controllers', [])
     });
   }
 
+})
+
+.controller('UserIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, Post, Comment,User) {
+  $scope.data = User.get({id: $stateParams.uId})
+  // User.get({id: $stateParams.uId})
+  // .$promise.then(function(data) {
+  //   $scope.data = data;
+  //   console.log($scope.data);
+  // });
 
 })
 
-.controller('PostDetailCtrl', function($scope, $stateParams, $http, $state, $rootScope, Post, Comment) {
+
+.controller('PostIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, Post, Comment) {
   $scope.comment = {"postId": $stateParams.pId, "content":""}
-  // $scope.post =
+  // $scope.post =   Post.get({id: $stateParams.pId})
   Post.get({id: $stateParams.pId})
   .$promise.then(function(data) {
-    $scope.post = data;
+    $scope.data = data;
+    console.log($scope.data);
   });
 
   $scope.sendComment = function() {
@@ -89,7 +100,6 @@ angular.module('starter.controllers', [])
       console.log(JSON.stringify(data))
       $state.go($state.current, {}, {reload: true});
     });
-
   }
 
 })

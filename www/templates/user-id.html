@@ -1,0 +1,26 @@
+<ion-view view-title="">
+  <ion-content class="padding">
+    <div class="">
+      {{data.user.email}} 's posts
+    </div>
+    <div class="card" ng-repeat="p in data.posts">
+      <a href="#/tab/posts/{{p._id}}">
+      <div class="item item-text-wrap">
+        <p>{{p.content}}</p>
+      </div>
+      </a>
+    </div>
+
+    <!-- <div style="margin-top:10px;">
+      <form ng-submit="sendComment()">
+          <label class="item item-input">
+            <textarea ng-model="comment.content" cols="5" rows="5"></textarea>
+          </label>
+          <label class="item ">
+            <input type="submit" value="comment" class="button button-calm">
+          </label>
+        <div> {{comment}}</div>
+      </form>
+    </div> -->
+  </ion-content>
+</ion-view>
