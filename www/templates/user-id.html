@@ -1,9 +1,21 @@
 <ion-view view-title="">
   <ion-content class="padding">
     <div class="">
-      {{data.user.email}} 's posts
+      {{user.email}} 'sss posts
+    </div><hr>
+    <div class="" ng-hide="isCurrentUser">
+      <div class="" ng-show="foing">
+        <button class="button button-small button-calm"  ng-click="unfollow()">
+          unfollow
+        </button>
+      </div>
+      <div class="" ng-show="!foing">
+        <button class="button button-small button-calm"  ng-click="follow()" >
+          follow
+        </button>
+      </div>
     </div>
-    <div class="card" ng-repeat="p in data.posts">
+    <div class="card" ng-repeat="p in posts">
       <a href="#/tab/posts/{{p._id}}">
       <div class="item item-text-wrap">
         <p>{{p.content}}</p>

@@ -4,6 +4,10 @@ angular.module('starter.services', ['ngResource'])
   return $resource($rootScope.baseUrl + '/api/users/:id');
 })
 
+.factory('Follow', function($resource, $rootScope) {
+  return $resource($rootScope.baseUrl + '/api/follow/:id');
+})
+
 .factory('Post', function($resource, $rootScope) {
   return $resource($rootScope.baseUrl + '/api/posts/:id');
 })
