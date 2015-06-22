@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $window, $http, $state, $rootScope, Session) {
   // Form data for the login modal
   $scope.loginData = {email: "gongsongping@gmail.com", password: "gsp191954"};
-  $scope.currentUser = $window.localStorage['currentUser']
+  $scope.currentUser = Boolean($window.localStorage['currentUser'])
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -26,20 +26,29 @@ angular.module('starter.controllers', [])
   $scope.doLogin = function() {
     var sess = new Session($scope.loginData);
     sess.$save(function(data) {
-      $window.localStorage['currentUser'] = data.remId;
-      $scope.currentUser = $window.localStorage['currentUser']
-      $http.defaults.headers.common['Authorization'] = "Token token=" + data.remId
-      console.log($window.localStorage['currentUser']);
+      console.log(data.remId);
+      // console.log(err);
+      if (data.remId) {
+        $window.localStorage['currentUser'] = data.remId;
+        $scope.currentUser = Boolean($window.localStorage['currentUser'])
+        $http.defaults.headers.common['Authorization'] = "Token token=" + data.remId
+        console.log($window.localStorage['currentUser']);
+        $scope.closeLogin();
+        $state.go('tab.home', {}, {reload: true});
+      } else {
+        // $scope.modal.show();
+        $scope.showLoginForm()
+      }
     });
-
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+    //
+    // $timeout(function() {
+    //   $scope.closeLogin();
+    // }, 1000);
 
   };
   $scope.logout = function() {
     $window.localStorage['currentUser'] = '';
-    $scope.currentUser = $window.localStorage['currentUser']
+    $scope.currentUser = Boolean($window.localStorage['currentUser'])
     $http.defaults.headers.common['Authorization'] = ''
     console.log($window.localStorage['currentUser']);
     // window.location.reload()
@@ -74,6 +83,7 @@ angular.module('starter.controllers', [])
     $scope.user = data.user;
     $scope.posts = data.posts;
     $scope.foing = data.foing;
+    console.log($scope.foing);
   });
 
   if ($window.localStorage['currentUser'] == $stateParams.uId) {

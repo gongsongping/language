@@ -62,7 +62,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     })
     .state('tab.user-id', {
       url: '/users/:uId',
-      // cache: false,
+      cache: false,
       views: {
         'tab-home': {
           templateUrl: 'templates/user-id.html',

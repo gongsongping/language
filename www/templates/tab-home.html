@@ -19,9 +19,12 @@ on-refresh="doRefresh()">
 </ion-refresher>
 
 <div class="card" ng-repeat="p in posts">
+  <div class="item item-divider">
+    <a href="#/tab/users/{{p.creator._id}}">
+     <p>{{p.creator.name}}</p>
+    </a>
+  </div>
   <a href="#/tab/posts/{{p._id}}">
-    <div class="item item-divider">
-    </div>
     <div class="{{p.hidepo}} item item-text-wrap">
       <p>{{p.content}}</p>
       <!-- <img src="{{p.picture.url}}" height="200" width="200" ng-show="'{{p.picture.url}}'"> -->
