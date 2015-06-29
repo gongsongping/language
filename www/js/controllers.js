@@ -1,8 +1,9 @@
 angular.module('starter.controllers', [])
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $window, $http, $state, $rootScope, Session) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $window, $http, $state, $rootScope, Session, User) {
   // Form data for the login modal
   $scope.loginData = {email: "gongsongping@gmail.com", password: "gsp191954"};
-  $scope.currentUser = Boolean($window.localStorage['currentUser'])
+  $scope.currentUser = Boolean($window.localStorage['currentUser']);
+  $scope.signUpData = {name:'gsp'};
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -21,7 +22,7 @@ angular.module('starter.controllers', [])
   $scope.showLoginForm = function() {
     $scope.modal.show();
   };
-
+  $scope.err = ''
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     var sess = new Session($scope.loginData);
@@ -37,6 +38,8 @@ angular.module('starter.controllers', [])
         $state.go('tab.home', {}, {reload: true});
       } else {
         // $scope.modal.show();
+        console.log(data.err);
+        $scope.err = data.err
         $scope.showLoginForm()
       }
     });
@@ -44,18 +47,40 @@ angular.module('starter.controllers', [])
     // $timeout(function() {
     //   $scope.closeLogin();
     // }, 1000);
-
   };
   $scope.logout = function() {
     $window.localStorage['currentUser'] = '';
     $scope.currentUser = Boolean($window.localStorage['currentUser'])
     $http.defaults.headers.common['Authorization'] = ''
     console.log($window.localStorage['currentUser']);
+    $scope.err = ''
     // window.location.reload()
     // $window.location.reload(true);
     // $state.go($state.current, {}, {reload: true});
-    $state.go('tab.account', {}, {reload: true});
+    // $state.go('tab.account', {}, {reload: true});
+    $scope.showLoginForm()
   };
+
+  $scope.doSignUp = function() {
+    var user = new User($scope.signUpData);
+    user.$save(function(data) {
+      console.log(data.remId);
+      // console.log(err);
+      if (data.remId) {
+        $window.localStorage['currentUser'] = data.remId;
+        $scope.currentUser = Boolean($window.localStorage['currentUser'])
+        $http.defaults.headers.common['Authorization'] = "Token token=" + data.remId
+        console.log($window.localStorage['currentUser']);
+        $scope.closeLogin();
+        $state.go('tab.home', {}, {reload: true});
+      } else {
+        // $scope.modal.show();
+        console.log(data.err);
+        $scope.err = data.err
+        $scope.showLoginForm()
+      }
+    });
+  }
 })
 
 .controller('HomeCtrl', function($scope, $http, $state, $rootScope, Post) {
