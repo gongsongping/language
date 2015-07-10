@@ -98,39 +98,43 @@ angular.module('starter.controllers', [])
       $state.go('tab.home', {}, {reload: true});
     });
   }
-
 })
 
 .controller('UserIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, $window, Post, Comment, User, Follow) {
   // $scope.user = User.get({id: $stateParams.uId})
   User.get({id: $stateParams.uId})
   .$promise.then(function(data) {
-    $scope.user = data.user;
-    $scope.posts = data.posts;
-    $scope.foing = data.foing;
-    console.log($scope.foing);
-  });
+    $scope.user = data.user
+    // $scope.posts = data.posts
+    $scope.foing = data.foing
+    if ($window.localStorage['currentUser'] == data.user.password) {
+      $scope.isCurrentUser = true
+    } else {
+      $scope.isCurrentUser = false
+    }
+    console.log(data.foing)
+  })
 
-  if ($window.localStorage['currentUser'] == $stateParams.uId) {
-    $scope.isCurrentUser = true
-  } else {
-    $scope.isCurrentUser = false
-  }
+  // if ($window.localStorage['currentUser'] == $stateParams.uId) {
+  //   $scope.isCurrentUser = true
+  // } else {
+  //   $scope.isCurrentUser = false
+  // }
 
   $scope.follow = function() {
-    var fo = new Follow({uId: $stateParams.uId});
+    var fo = new Follow({uId: $stateParams.uId})
     fo.$save(function(data) {
       console.log(JSON.stringify(data))
-      $scope.foing = !$scope.foing;
-    });
+      $scope.foing = !$scope.foing
+    })
   }
 
   $scope.unfollow = function() {
     Follow.get({id: $stateParams.uId})
     .$promise.then(function(data) {
       console.log(JSON.stringify(data))
-      $scope.foing = !$scope.foing;
-    });
+      $scope.foing = !$scope.foing
+    })
   }
 
 })
@@ -141,8 +145,8 @@ angular.module('starter.controllers', [])
   // $scope.post =   Post.get({id: $stateParams.pId})
   Post.get({id: $stateParams.pId})
   .$promise.then(function(data) {
-    $scope.post = data.post;
-    $scope.comments = data.comments
+    $scope.post = data
+    // $scope.comments = data.comments
     // console.log($scope.data);
   });
 

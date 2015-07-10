@@ -15,8 +15,8 @@
         </button>
       </div>
     </div>
-    <div class="card" ng-repeat="p in posts">
-      <a href="#/tab/posts/{{p._id}}">
+    <div class="card" ng-repeat="p in user.posts">
+      <a href="#/tab/posts/{{p.id}}">
       <div class="item item-text-wrap">
         <p>{{p.content}}</p>
       </div>
