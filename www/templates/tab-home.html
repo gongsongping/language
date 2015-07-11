@@ -21,7 +21,7 @@ on-refresh="doRefresh()">
 <div class="card" ng-repeat="p in posts">
   <div class="item item-divider">
     <a href="#/tab/users/{{p.user.id}}">
-     <p>{{p.name}}</p>
+     <p>{{p.user.name}}</p>
     </a>
   </div>
   <a href="#/tab/posts/{{p.id}}">
