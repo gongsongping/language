@@ -19,6 +19,10 @@ angular.module('starter.services', ['ngResource'])
 .factory('Session', function($resource, $rootScope) {
   return $resource($rootScope.baseUrl + '/api/session/:id');
 })
+.factory("Items", function($firebaseArray) {
+  var itemsRef = new Firebase("https://gongsongpingionic.firebaseio.com/items");
+  return $firebaseArray(itemsRef);
+})
 
 .factory('Qiniu', function() {
   // Might use a resource here that returns a JSON array

@@ -155,8 +155,16 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('CrosslangCtrl', function($scope, $http, $rootScope) {
-
+.controller('CrosslangCtrl', function($scope, $http, $rootScope, Items) {
+  $scope.items = Items
+  $scope.addItem = function() {
+    var name = prompt("What do you need to buy?");
+    if (name) {
+      $scope.items.$add({
+        "name": name
+      })
+    }
+  }
 
 })
 

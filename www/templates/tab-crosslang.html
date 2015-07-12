@@ -1,16 +1,19 @@
 <ion-view view-title="Crosslang">
   <ion-content>
     <!-- <ion-list>
-      <ion-item collection-repeat="feed in feeds" item-width="33%"
+    <ion-item collection-repeat="feed in feeds" item-width="33%"
     item-height="200px" >
-        <img ng-src="{{feed.imageFile.url}}">
+    <img ng-src="{{feed.imageFile.url}}">
+  </ion-item>
+</ion-list> -->
+    <h1 class="title">Items</h1>
+      <button class="button button-icon ion-plus" ng-click="addItem()">
+      </button>
+    <ion-list>
+      <ion-item ng-repeat="item in items">
+        {{item.name}}
       </ion-item>
-    </ion-list> -->
-    <div class="card">
-      <p>
-        {{post.content}}
-      </p>
-    </div>
+    </ion-list>
 
-  </ion-content>
+</ion-content>
 </ion-view>
