@@ -12,17 +12,31 @@ angular.module('starter.controllers', [])
     if (Boolean($window.localStorage['currentUser']) === false) {
       modal.show()
     }
-  });
+  })
 
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
     $scope.modal.hide()
-  };
+  }
   // Open the login modal
   $scope.showLoginForm = function() {
     $scope.modal.show()
-  };
+  }
+  $scope.login = true
+  $scope.signup = false
   $scope.err = ''
+  $scope.showLogIn = function() {
+    $scope.login = true
+    $scope.signup = false
+    $('#loginbtn').addClass('active')
+    $('#signupbtn').removeClass('active')
+  }
+  $scope.showSignUp = function() {
+    $scope.login = false
+    $scope.signup = true
+    $('#signupbtn').addClass('active')
+    $('#loginbtn').removeClass('active')
+  }
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     var sess = new Session($scope.loginData);
@@ -38,11 +52,11 @@ angular.module('starter.controllers', [])
         $state.go('tab.home', {}, {reload: true})
       } else {
         // $scope.modal.show();
-        console.log(data.err);
+        console.log(data.err)
         $scope.err = data.err
         $scope.showLoginForm()
       }
-    });
+    })
     //
     // $timeout(function() {
     //   $scope.closeLogin();
@@ -79,7 +93,7 @@ angular.module('starter.controllers', [])
         $scope.err = data.err
         $scope.showLoginForm()
       }
-    });
+    })
   }
 })
 
