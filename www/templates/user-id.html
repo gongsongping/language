@@ -1,38 +1,51 @@
-<ion-view view-title="">
+<ion-view view-title="{{user.name}}">
   <ion-content class="padding">
-    <div class="">
-      {{user.email}} 'sss posts
-    </div><hr>
-    <div class="" ng-hide="isCurrentUser">
-      <div class="" ng-show="foing">
-        <button class="button button-small button-calm"  ng-click="unfollow()">
-          unfollow
-        </button>
+
+    <div class="row">
+      <div class="col">
+        <img src="mcfly.jpg">
+        <h2>{{user.name}}</h2>
       </div>
-      <div class="" ng-show="!foing">
-        <button class="button button-small button-calm"  ng-click="follow()" >
-          follow
-        </button>
+      <div class="col col-75">
+        <div ng-hide="isCurrentUser">
+          <div ng-show="foing">
+            <button  class="button button-block  button-assertive button-outline"  ng-click="unfollow()">  unfollow  </button>
+          </div>
+          <div ng-show="!foing">
+            <button  class="button button-block  button-assertive button-outline"  ng-click="follow()"> follow  </button>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="card" ng-repeat="p in user.posts">
-      <a href="#/tab/posts/{{p.id}}">
-      <div class="item item-text-wrap">
-        <p>{{p.content}}</p>
-      </div>
-      </a>
     </div>
 
-    <!-- <div style="margin-top:10px;">
-      <form ng-submit="sendComment()">
-          <label class="item item-input">
-            <textarea ng-model="comment.content" cols="5" rows="5"></textarea>
-          </label>
-          <label class="item ">
-            <input type="submit" value="comment" class="button button-calm">
-          </label>
-        <div> {{comment}}</div>
-      </form>
-    </div> -->
+    <div class="list card" ng-repeat="p in user.posts">
+     <a href="#/tab/posts/{{p.id}}">
+     <div class="item item-body">
+       <!-- <img class="full-image" src="delorean.jpg"> -->
+       <a href="#/tab/posts/{{p.id}}">
+       <p class="{{p.hidden}}">{{p.content}}</p>
+       </a>
+       <p>
+         <a href="#" class="subdued">1 Like</a>
+         <a href="#" class="subdued">5 Comments</a>
+       </p>
+     </div>
+     </a>
+     <div class="item tabs tabs-secondary tabs-icon-left">
+       <a class="tab-item" href="#">
+         <i class="icon ion-thumbsup"></i>
+         Like
+       </a>
+       <a class="tab-item" href="#">
+         <i class="icon ion-chatbox"></i>
+         Comment
+       </a>
+       <a class="tab-item" href="#">
+         <i class="icon ion-share"></i>
+         Share
+       </a>
+     </div>
+   </div>
+
   </ion-content>
 </ion-view>

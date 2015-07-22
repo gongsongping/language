@@ -1,43 +1,42 @@
 <ion-view view-title="Chats">
   <ion-content>
-    <!-- <ion-list>
-    <ion-item class="item-remove-animate item-avatar item-icon-right"  ng-repeat="p in posts"  item-height="200px" type="item-text-wrap" href="#/tab/chats/{{p.id}}">
+    <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+    </ion-refresher>
 
-    <h2>{{p.title}}</h2>
-    <p>{{p.content}}</p>
-    <a class="item item-thumbnail-left" href="#">
-  </a>
-  <i class="icon ion-chevron-right icon-accessory"></i>
-  <ion-option-button class="button-assertive" ng-click="remove(chat)">
-  Delete
-</ion-option-button>
-</ion-item>
-</ion-list> -->
-<ion-refresher
-pulling-text="Pull to refresh..."
-on-refresh="doRefresh()">
-</ion-refresher>
-
-<div class="card" ng-repeat="p in posts">
-  <div class="item item-divider">
+   <div class="list card" ng-repeat="p in posts">
     <a href="#/tab/users/{{p.user.id}}">
-     <p>{{p.user.name}}</p>
-    </a>
-  </div>
-  <a href="#/tab/posts/{{p.id}}">
-    <div class="{{p.hidden}} item item-text-wrap">
-      <p>{{p.content}}</p>
-      <!-- <img src="{{p.picture.url}}" height="200" width="200" ng-show="'{{p.picture.url}}'"> -->
+    <div class="item item-avatar">
+       <img src="mcfly.jpg">
+       <h2>{{p.user.name}}</h2>
     </div>
-    <!-- <div class="item item-divider">
-      I'm a Footer in a Card!
-    </div> -->
-  </a>
-</div>
+    </a>
+    <div class="item item-body">
+      <!-- <img class="full-image" src="delorean.jpg"> -->
+      <a href="#/tab/posts/{{p.id}}">
+      <p class="{{p.hidden}}">{{p.content}}</p>
+      </a>
+      <p>
+        <a href="#" class="subdued">1 Like</a>
+        <a href="#" class="subdued">5 Comments</a>
+      </p>
+    </div>
+    <div class="item tabs tabs-secondary tabs-icon-left">
+      <a class="tab-item" href="#">
+        <i class="icon ion-thumbsup"></i>
+        Like
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-chatbox"></i>
+        Comment
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-share"></i>
+        Share
+      </a>
+    </div>
+  </div>
+
 </ion-content>
 </ion-view>
-<style media="screen">
-  .true {
-    background-color: #C4F9FF;
-  }
-</style>
