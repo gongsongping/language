@@ -2,38 +2,39 @@ angular.module('starter.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $window, $http, $state, $rootScope, Session, User) {
   // Form data for the login modal
   $scope.loginData = {email: "gongsongping@gmail.com", password: "gsp191954"}
-  $scope.currentUser = Boolean($window.localStorage['currentUser'])
-  $scope.signUpData = {name:'gsp'}
+  $scope.currentUser = Boolean($window.localStorage.token)
+  $scope.signupData = {name:'gsp'}
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal
-    if (Boolean($window.localStorage['currentUser']) === false) {
+    if (Boolean($window.localStorage.token) === false) {
       modal.show()
     }
   })
 
   // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
+  $scope.closeForms = function() {
     $scope.modal.hide()
   }
   // Open the login modal
-  $scope.showLoginForm = function() {
+  $scope.showForms = function() {
     $scope.modal.show()
   }
-  $scope.login = true
-  $scope.signup = false
-  $scope.err = ''
-  $scope.showLogIn = function() {
-    $scope.login = true
-    $scope.signup = false
+  $scope.loginForm = true
+  $scope.signupForm = false
+  $scope.loginErr = ''
+  $scope.signupErr = ''
+  $scope.showLogin = function() {
+    $scope.loginForm = true
+    $scope.signupForm = false
     $('#loginbtn').addClass('active')
     $('#signupbtn').removeClass('active')
   }
-  $scope.showSignUp = function() {
-    $scope.login = false
-    $scope.signup = true
+  $scope.showSignup = function() {
+    $scope.loginForm = false
+    $scope.signupForm = true
     $('#signupbtn').addClass('active')
     $('#loginbtn').removeClass('active')
   }
@@ -44,17 +45,17 @@ angular.module('starter.controllers', [])
       console.log(data.token)
       // console.log(err);
       if (data.token) {
-        $window.localStorage['currentUser'] = data.token
-        $scope.currentUser = Boolean($window.localStorage['currentUser'])
+        $window.localStorage.token = data.token
+        $scope.currentUser = Boolean($window.localStorage.token)
         $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
-        console.log($window.localStorage['currentUser']);
-        $scope.closeLogin();
+        console.log($window.localStorage.token)
+        $scope.closeForms()
         $state.go('tab.home', {}, {reload: true})
       } else {
         // $scope.modal.show();
         console.log(data.err)
-        $scope.err = data.err
-        $scope.showLoginForm()
+        $scope.loginErr = data.err
+        $scope.showForms()
       }
     })
     //
@@ -63,38 +64,40 @@ angular.module('starter.controllers', [])
     // }, 1000);
   };
   $scope.logout = function() {
-    $window.localStorage['currentUser'] = ''
-    $scope.currentUser = Boolean($window.localStorage['currentUser'])
+    $window.localStorage.token = ''
+    $scope.currentUser = Boolean($window.localStorage.token)
     $http.defaults.headers.common['Authorization'] = ''
-    console.log($window.localStorage['currentUser'])
-    $scope.err = ''
+    console.log($window.localStorage.token)
+    $scope.loginErr = ''
+    $scope.signupErr = ''
     // window.location.reload()
     // $window.location.reload(true);
     // $state.go($state.current, {}, {reload: true});
     // $state.go('tab.account', {}, {reload: true});
-    $scope.showLoginForm()
-  };
+    $scope.showForms()
+  }
 
-  $scope.doSignUp = function() {
-    var user = new User($scope.signUpData)
+  $scope.doSignup = function() {
+    var user = new User($scope.signupData)
     user.$save(function(data) {
       console.log(data.token)
       // console.log(err);
       if (data.token) {
-        $window.localStorage['currentUser'] = data.token
-        $scope.currentUser = Boolean($window.localStorage['currentUser'])
+        $window.localStorage.token = data.token
+        $scope.currentUser = Boolean($window.localStorage.token)
         $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
-        console.log($window.localStorage['currentUser'])
-        $scope.closeLogin()
+        console.log($window.localStorage.token)
+        $scope.closeForms()
         $state.go('tab.home', {}, {reload: true})
       } else {
         // $scope.modal.show()
         console.log(data.err)
-        $scope.err = data.err
-        $scope.showLoginForm()
+        $scope.signupErr = data.err
+        $scope.showForms()
       }
     })
   }
+
 })
 
 .controller('HomeCtrl', function($scope, $http, $state, $rootScope, Post) {
@@ -121,7 +124,7 @@ angular.module('starter.controllers', [])
     $scope.user = data.user
     // $scope.posts = data.posts
     $scope.foing = data.foing
-    if ($window.localStorage['currentUser'] == data.user.password) {
+    if ($window.localStorage.token == data.user.password) {
       $scope.isCurrentUser = true
     } else {
       $scope.isCurrentUser = false
@@ -155,7 +158,7 @@ angular.module('starter.controllers', [])
     $scope.post = data
     // $scope.comments = data.comments
     // console.log($scope.data);
-  });
+  })
 
   $scope.sendComment = function() {
     var comment = new Comment($scope.comment)
@@ -164,7 +167,6 @@ angular.module('starter.controllers', [])
       $state.go($state.current, {}, {reload: true})
     })
   }
-
 })
 
 
@@ -206,10 +208,10 @@ angular.module('starter.controllers', [])
 // .success(function(data, status, headers, config){
 //   // alert(JSON.stringify(data))
 //   // alert(JSON.stringify(headers()))
-//   $window.localStorage['currentUser'] = data.remId;
-//   $scope.currentUser = $window.localStorage['currentUser']
+//   $window.localStorage.token = data.remId;
+//   $scope.currentUser = $window.localStorage.token
 //   $http.defaults.headers.common['Authorization'] = "Token token=" + data.remId
-//   console.log($window.localStorage['currentUser']);
+//   console.log($window.localStorage.token);
 //   // window.location.reload()
 // })
 // .error(function(data, status, headers, config){

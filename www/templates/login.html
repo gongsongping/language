@@ -2,16 +2,16 @@
   <ion-header-bar>
     <!-- <h1 class="title">Login</h1> -->
     <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+      <button class="button button-clear" ng-click="closeForms()">Close</button>
     </div>
   </ion-header-bar>
   <ion-content>
     <div class="button-bar">
-      <a id="loginbtn" class="button button-stable active" ng-click="showLogIn()">Log In</a>
-      <a id="signupbtn" class="button button-stable" ng-click="showSignUp()">Sign Up</a>
+      <a id="loginbtn" class="button button-stable active" ng-click="showLogin()">Log In</a>
+      <a id="signupbtn" class="button button-stable" ng-click="showSignup()">Sign Up</a>
     </div>
-    <div ng-show="login">
-      <div ng-show="err" style="padding:10px; color:red;">{{err}}</div>
+    <div ng-show="loginForm">
+      <div ng-show="loginErr" style="padding:10px; color:red;">{{loginErr}}</div>
       <form ng-submit="doLogin()">
         <div class="list">
           <label class="item item-input">
@@ -26,34 +26,34 @@
             <button class="button button-block button-positive" type="submit">Log in</button>
           </label>
         </div>
-        <div>{{loginData}}</div>
+        <!-- <div>{{loginData}}</div> -->
       </form>
     </div>
-    <div ng-show="signup">
-      <div ng-show="err" style="padding:10px; color:red;">{{err}}</div>
-      <form ng-submit="doSignUp()">
+    <div ng-show="signupForm">
+      <div ng-show="signupErr" style="padding:10px; color:red;">{{signupErr}}</div>
+      <form ng-submit="doSignup()">
         <div class="list">
           <label class="item item-input">
             <span class="input-label">Name</span>
-            <input type="text" ng-model="signUpData.name">
+            <input type="text" ng-model="signupData.name">
           </label>
           <label class="item item-input">
             <span class="input-label">Email</span>
-            <input type="text" ng-model="signUpData.email">
+            <input type="text" ng-model="signupData.email">
           </label>
           <label class="item item-input">
             <span class="input-label">Password</span>
-            <input type="password" ng-model="signUpData.password">
+            <input type="password" ng-model="signupData.password">
           </label>
           <label class="item item-input">
             <span class="input-label">Password Confirmation</span>
-            <input type="password" ng-model="signUpData.password_confirmation">
+            <input type="password" ng-model="signupData.password_confirmation">
           </label>
           <label class="item">
             <button class="button button-block button-positive" type="submit">sign up</button>
           </label>
         </div>
-        <div>{{signUpData}}</div>
+        <!-- <div>{{signUpData}}</div> -->
       </form>
     </div>
   </ion-content>

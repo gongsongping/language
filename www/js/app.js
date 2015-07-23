@@ -11,20 +11,20 @@ angular.module('starter', ['ionic','firebase', 'starter.controllers', 'starter.s
 
   $rootScope.baseUrl = "http://localhost:3000"
   // $rootScope.baseUrl = "http://104.131.150.241"
-  console.log($window.localStorage['currentUser'])
-  if ($window.localStorage['currentUser']) {
-    $http.defaults.headers.common["Authorization"] = "Token token=" + $window.localStorage['currentUser'];
+  console.log($window.localStorage.token)
+  if ($window.localStorage.token) {
+    $http.defaults.headers.common["Authorization"] = "Token token=" + $window.localStorage.token
   }
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true)
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      StatusBar.styleDefault()
     }
   });
 })
@@ -58,22 +58,22 @@ angular.module('starter', ['ionic','firebase', 'starter.controllers', 'starter.s
         }
       }
     })
-    .state('tab.user-id', {
-      url: '/users/:id',
+    .state('tab.home-user-id', {
+      url: '/home/users/:id',
       cache: false,
       views: {
         'tab-home': {
-          templateUrl: 'templates/user-id.html',
+          templateUrl: 'templates/home-user-id.html',
           controller: 'UserIdCtrl'
         }
       }
     })
-    .state('tab.post-id', {
-      url: '/posts/:id',
+    .state('tab.home-post-id', {
+      url: '/home/posts/:id',
       cache: false,
       views: {
         'tab-home': {
-          templateUrl: 'templates/post-id.html',
+          templateUrl: 'templates/home-post-id.html',
           controller: 'PostIdCtrl'
         }
       }

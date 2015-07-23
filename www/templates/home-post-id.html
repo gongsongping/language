@@ -7,7 +7,7 @@ The Friends service returns an array of friend data
 <ion-view view-title="">
   <ion-content class="padding">
     <div class="list card" >
-     <a href="#/tab/users/{{post.user.id}}">
+     <a href="#/tab/home/users/{{post.user.id}}">
      <div class="item item-avatar">
         <img src="mcfly.jpg">
         <h2>{{post.user.name}}</h2>
@@ -28,16 +28,16 @@ The Friends service returns an array of friend data
     <div style="margin-top:10px;">
       <form ng-submit="sendComment()">
           <label class="item item-input">
-            <textarea ng-model="comment.content" cols="5" rows="5"></textarea>
+            <textarea ng-model="comment.content" cols="3" rows="3"></textarea>
           </label>
           <label class="item ">
             <input type="submit" value="comment" class="button button-calm">
           </label>
-        <div> {{comment}}</div>
+        <!-- <div> {{comment}}</div> -->
       </form>
     </div>
     <div class="list card" ng-repeat="c in post.comments">
-     <a href="#/tab/users/{{c.user.id}}">
+     <a href="#/tab/home/users/{{c.user.id}}">
      <div class="item item-avatar">
        <img src="mcfly.jpg">
        <h2>{{c.user.name}}</h2>

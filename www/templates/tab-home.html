@@ -6,7 +6,7 @@
     </ion-refresher>
 
    <div class="list card" ng-repeat="p in posts">
-    <a href="#/tab/users/{{p.user.id}}">
+    <a href="#/tab/home/users/{{p.user.id}}">
     <div class="item item-avatar">
        <img src="mcfly.jpg">
        <h2>{{p.user.name}}</h2>
@@ -14,7 +14,7 @@
     </a>
     <div class="item item-body">
       <!-- <img class="full-image" src="delorean.jpg"> -->
-      <a href="#/tab/posts/{{p.id}}">
+      <a href="#/tab/home/posts/{{p.id}}">
       <p class="{{p.hidden}}">{{p.content}}</p>
       </a>
       <p>
