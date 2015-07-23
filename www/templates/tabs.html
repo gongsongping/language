@@ -15,7 +15,7 @@ navigation history that also transitions its views in and out.
   </ion-tab>
 
   <!-- Dashboard Tab -->
-  <ion-tab title="Write" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/write">
+  <ion-tab title="Write" icon-off="ion-ios-plus-outline" icon-on="ion-ios-plus" href="#/tab/write">
     <button ng-hide="currentUser" class="button button-block button-assertive" style="margin-top:60px;" ng-click=showLoginForm()>
       login
     </button>
@@ -23,18 +23,28 @@ navigation history that also transitions its views in and out.
   </ion-tab>
 
   <!-- Crosslang Tab -->
-  <ion-tab title="Crosslang" icon-off="ion-ios-camera-outline" icon-on="ion-ios-camera" href="#/tab/crosslang">
+  <ion-tab title="Change" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" href="#/tab/change">
     <button ng-hide="currentUser" class="button button-block button-assertive" style="margin-top:60px;" ng-click=showLoginForm()>
       login
     </button>
     <button ng-show="currentUser" class="button button-block button-assertive" style="margin-top:60px;" ng-click=logout()>
       logout
     </button>
-    <ion-nav-view name="tab-crosslang"></ion-nav-view>
+    <ion-nav-view name="tab-change"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="Message" icon-off="ion-ios-chatbubble-outline" icon-on="ion-ios-chatbubble" href="#/tab/message">
+    <button ng-hide="currentUser" class="button button-block button-assertive" style="margin-top:60px;" ng-click=showLoginForm()>
+      login
+    </button>
+    <button ng-show="currentUser" class="button button-block button-assertive" style="margin-top:60px;" ng-click=logout()>
+      logout
+    </button>
+    <ion-nav-view name="tab-message"></ion-nav-view>
   </ion-tab>
 
   <!-- Account Tab -->
-  <ion-tab title="Account" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/account">
+  <ion-tab title="Account" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" href="#/tab/account">
     <button ng-hide="currentUser" class="button button-block button-assertive" style="margin-top:60px;" ng-click=showLoginForm()>
       login
     </button>

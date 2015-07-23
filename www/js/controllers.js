@@ -110,7 +110,7 @@ angular.module('starter.controllers', [])
     var post = new Post($scope.post)
     post.$save(function(data) {
       $state.go('tab.home', {}, {reload: true})
-    });
+    })
   }
 })
 
@@ -144,7 +144,6 @@ angular.module('starter.controllers', [])
       $scope.foing = !$scope.foing
     })
   }
-
 })
 
 
@@ -159,34 +158,38 @@ angular.module('starter.controllers', [])
   });
 
   $scope.sendComment = function() {
-    var comment = new Comment($scope.comment);
+    var comment = new Comment($scope.comment)
     comment.$save(function(data) {
       console.log(JSON.stringify(data))
-      $state.go($state.current, {}, {reload: true});
-    });
+      $state.go($state.current, {}, {reload: true})
+    })
   }
 
 })
 
 
-.controller('CrosslangCtrl', function($scope, $http, $rootScope, Items) {
+.controller('ChangeCtrl', function($scope, $http, $rootScope, Items) {
   $scope.items = Items
   $scope.addItem = function() {
-    var name = prompt("What do you need to buy?");
+    var name = prompt("What do you need to buy?")
     if (name) {
       $scope.items.$add({
         "name": name
       })
     }
   }
+})
 
+.controller('MessageCtrl', function($scope,$http) {
+  $scope.settings = {
+    enableFriends: true
+  }
 })
 
 .controller('AccountCtrl', function($scope,$http) {
   $scope.settings = {
     enableFriends: true
   }
-
 })
 
 

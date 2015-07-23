@@ -80,6 +80,7 @@ angular.module('starter', ['ionic','firebase', 'starter.controllers', 'starter.s
     })
   .state('tab.write', {
     url: '/write',
+    cache: false,
     views: {
       'tab-write': {
         templateUrl: 'templates/tab-write.html',
@@ -87,13 +88,22 @@ angular.module('starter', ['ionic','firebase', 'starter.controllers', 'starter.s
       }
     }
   })
-  .state('tab.crosslang', {
-    url: '/crosslang',
+  .state('tab.change', {
+    url: '/change',
     // cache: false,
     views: {
-      'tab-crosslang': {
-        templateUrl: 'templates/tab-crosslang.html',
-        controller: 'CrosslangCtrl'
+      'tab-change': {
+        templateUrl: 'templates/tab-change.html',
+        controller: 'ChangeCtrl'
+      }
+    }
+  })
+  .state('tab.message', {
+    url: '/message',
+    views: {
+      'tab-message': {
+        templateUrl: 'templates/tab-message.html',
+        controller: 'MessageCtrl'
       }
     }
   })
