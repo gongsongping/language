@@ -26,13 +26,13 @@ angular.module('starter.controllers', [])
   $scope.signupForm = false
   $scope.loginErr = ''
   $scope.signupErr = ''
-  $scope.showLogin = function() {
+  $scope.activateLoginForm = function() {
     $scope.loginForm = true
     $scope.signupForm = false
     $('#loginbtn').addClass('active')
     $('#signupbtn').removeClass('active')
   }
-  $scope.showSignup = function() {
+  $scope.activateSignupForm = function() {
     $scope.loginForm = false
     $scope.signupForm = true
     $('#signupbtn').addClass('active')

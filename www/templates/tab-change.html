@@ -1,4 +1,4 @@
-<ion-view view-title="Crosslang">
+<ion-view view-title="Change">
   <ion-content>
     <!-- <ion-list>
     <ion-item collection-repeat="feed in feeds" item-width="33%"
@@ -7,13 +7,13 @@
   </ion-item>
 </ion-list> -->
 
-<div class="tabs-striped tabs-color-assertive">
+<!-- <div class="tabs-striped tabs-color-assertive">
   <div class="tabs">
-    <a class="tab-item active" href="#">
+    <a class="tab-item" href="#tab/change/sub1">
       <i class="icon ion-home"></i>
       Test
     </a>
-    <a class="tab-item active" href="#">
+    <a class="tab-item" href="#">
       <i class="icon ion-star"></i>
       Favorites
     </a>
@@ -22,17 +22,33 @@
       Settings
     </a>
   </div>
-</div>
+</div> -->
+  <div class="">
+    change change
+  </div>
 
 
-<h1 class="title">Items</h1>
+<!-- <ion-nav-view name="change-pages"></ion-nav-view> -->
+<!-- <ui-view name="change-pages"></ui-view> -->
+
+<!-- <h1 class="title">Items</h1>
 <button class="button button-icon ion-plus" ng-click="addItem()">
 </button>
 <ion-list>
   <ion-item ng-repeat="item in items">
     {{item.name}}
   </ion-item>
-</ion-list>
+</ion-list> -->
 
 </ion-content>
 </ion-view>
+<ion-tabs class="tabs-striped tabs-top tabs-background-stable">
+   <ion-tab title="Page 1" href="#tab/change/page1">
+     <ion-nav-view name="change-page1"></ion-nav-view>
+   </ion-tab>
+
+   <ion-tab title="Page 2" href="#tab/change/page2">
+     <ion-nav-view name="change-page2"></ion-nav-view>
+   </ion-tab>
+
+</ion-tabs>

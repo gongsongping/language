@@ -7,8 +7,8 @@
   </ion-header-bar>
   <ion-content>
     <div class="button-bar">
-      <a id="loginbtn" class="button button-stable active" ng-click="showLogin()">Log In</a>
-      <a id="signupbtn" class="button button-stable" ng-click="showSignup()">Sign Up</a>
+      <a id="loginbtn" class="button button-stable active" ng-click="activateLoginForm()">Log In</a>
+      <a id="signupbtn" class="button button-stable" ng-click="activateSignupForm()">Sign Up</a>
     </div>
     <div ng-show="loginForm">
       <div ng-show="loginErr" style="padding:10px; color:red;">{{loginErr}}</div>

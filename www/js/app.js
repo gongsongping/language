@@ -94,7 +94,28 @@ angular.module('starter', ['ionic','firebase', 'starter.controllers', 'starter.s
     views: {
       'tab-change': {
         templateUrl: 'templates/tab-change.html',
+        abstract: true,
         controller: 'ChangeCtrl'
+      }
+    }
+  })
+  .state('tab.change.page1', {
+    url: '/page1',
+    // cache: false,
+    views: {
+      'change-page1': {
+        templateUrl: 'templates/change-page1.html'
+        // controller: 'ChangeCtrl'
+      }
+    }
+  })
+  .state('tab.change.page2', {
+    url: '/page2',
+    // cache: false,
+    views: {
+      'change-page2': {
+        templateUrl: 'templates/change-page2.html'
+        // controller: 'ChangeCtrl'
       }
     }
   })
