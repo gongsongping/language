@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic','firebase', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services']) //'firebase',
 
-.run(function($ionicPlatform, $http, $window, $rootScope) {
+.run(function($ionicPlatform, $http, $window, $rootScope, $state) {
 
   $rootScope.baseUrl = "http://localhost:3000"
   // $rootScope.baseUrl = "http://104.131.150.241"
@@ -26,7 +26,7 @@ angular.module('starter', ['ionic','firebase', 'starter.controllers', 'starter.s
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault()
     }
-  });
+  })
 })
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
@@ -39,7 +39,33 @@ angular.module('starter', ['ionic','firebase', 'starter.controllers', 'starter.s
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
+  .state('forms', {
+    url: "/forms",
+    // cache: false,
+    // abstract: true,
+    templateUrl: "templates/forms.html",
+    controller: 'AppCtrl'
+  })
+  .state('forms.login', {
+    url: '/login',
+    cache: false,
+    views: {
+      'form-login': {
+        templateUrl: 'templates/form-login.html'
+      }
+    }
+  })
+  .state('forms.signup', {
+    url: '/signup',
+    cache: false,
+    views: {
+      'form-signup': {
+        templateUrl: 'templates/form-signup.html'
+        // controller: 'ChangeCtrl'
+      }
+    }
+  })
+  .state('tab', {
     url: "/tab",
     abstract: true,
     templateUrl: "templates/tabs.html",
@@ -48,7 +74,7 @@ angular.module('starter', ['ionic','firebase', 'starter.controllers', 'starter.s
 
   // Each tab has its own nav history stack:
 
-  .state('tab.home', {
+    .state('tab.home', {
       url: '/home',
       cache: false,
       views: {

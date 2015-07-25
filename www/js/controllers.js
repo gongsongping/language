@@ -1,43 +1,20 @@
 angular.module('starter.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $window, $http, $state, $rootScope, Session, User) {
+  if ($window.localStorage.token) {
+    $state.go('tab.home', {}, {reload: true})
+  } else {
+    $state.go('forms.login', {}, {reload: true})
+  }
   // Form data for the login modal
   $scope.loginData = {email: "gongsongping@gmail.com", password: "gsp191954"}
   $scope.currentUser = Boolean($window.localStorage.token)
   $scope.signupData = {name:'gsp'}
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal
-    if (Boolean($window.localStorage.token) === false) {
-      modal.show()
-    }
-  })
 
-  // Triggered in the login modal to close it
-  $scope.closeForms = function() {
-    $scope.modal.hide()
-  }
-  // Open the login modal
-  $scope.showForms = function() {
-    $scope.modal.show()
-  }
-  $scope.loginForm = true
-  $scope.signupForm = false
-  $scope.loginErr = ''
-  $scope.signupErr = ''
-  $scope.activateLoginForm = function() {
-    $scope.loginForm = true
-    $scope.signupForm = false
-    $('#loginbtn').addClass('active')
-    $('#signupbtn').removeClass('active')
-  }
-  $scope.activateSignupForm = function() {
-    $scope.loginForm = false
-    $scope.signupForm = true
-    $('#signupbtn').addClass('active')
-    $('#loginbtn').removeClass('active')
-  }
+  // $scope.loginForm = true
+  // $scope.signupForm = false
+  $rootScope.loginErr = ''
+  $rootScope.signupErr = ''
+
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     var sess = new Session($scope.loginData)
@@ -49,32 +26,30 @@ angular.module('starter.controllers', [])
         $scope.currentUser = Boolean($window.localStorage.token)
         $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
         console.log($window.localStorage.token)
-        $scope.closeForms()
+        // $scope.closeForms()
         $state.go('tab.home', {}, {reload: true})
       } else {
-        // $scope.modal.show();
         console.log(data.err)
-        $scope.loginErr = data.err
-        $scope.showForms()
+        $rootScope.loginErr = data.err
+        // $scope.showForms()
       }
     })
-    //
-    // $timeout(function() {
-    //   $scope.closeLogin();
-    // }, 1000);
-  };
+
+  }
   $scope.logout = function() {
     $window.localStorage.token = ''
     $scope.currentUser = Boolean($window.localStorage.token)
     $http.defaults.headers.common['Authorization'] = ''
     console.log($window.localStorage.token)
-    $scope.loginErr = ''
-    $scope.signupErr = ''
+    $rootScope.loginErr = ''
+    $rootScope.signupErr = ''
     // window.location.reload()
     // $window.location.reload(true);
     // $state.go($state.current, {}, {reload: true});
     // $state.go('tab.account', {}, {reload: true});
-    $scope.showForms()
+    // $scope.showForms()
+    $state.go('forms.login', {}, {reload: true})
+
   }
 
   $scope.doSignup = function() {
@@ -87,16 +62,21 @@ angular.module('starter.controllers', [])
         $scope.currentUser = Boolean($window.localStorage.token)
         $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
         console.log($window.localStorage.token)
-        $scope.closeForms()
+        // $scope.closeForms()
         $state.go('tab.home', {}, {reload: true})
       } else {
         // $scope.modal.show()
         console.log(data.err)
-        $scope.signupErr = data.err
-        $scope.showForms()
+        $rootScope.signupErr = data.err
+        // $scope.showForms()
       }
     })
   }
+
+})
+
+.controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User) {
+
 
 })
 
@@ -170,16 +150,16 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('ChangeCtrl', function($scope, $http, $rootScope, Items) {
-  $scope.items = Items
-  $scope.addItem = function() {
-    var name = prompt("What do you need to buy?")
-    if (name) {
-      $scope.items.$add({
-        "name": name
-      })
-    }
-  }
+.controller('ChangeCtrl', function($scope, $http, $rootScope) {
+  // $scope.items = Items
+  // $scope.addItem = function() {
+  //   var name = prompt("What do you need to buy?")
+  //   if (name) {
+  //     $scope.items.$add({
+  //       "name": name
+  //     })
+  //   }
+  // }
 })
 
 .controller('MessageCtrl', function($scope,$http) {
@@ -194,6 +174,37 @@ angular.module('starter.controllers', [])
   }
 })
 
+// $scope.activateLoginForm = function() {
+//   $scope.loginForm = true
+//   $scope.signupForm = false
+//   $('#loginbtn').addClass('active')
+//   $('#signupbtn').removeClass('active')
+// }
+// $scope.activateSignupForm = function() {
+//   $scope.loginForm = false
+//   $scope.signupForm = true
+//   $('#signupbtn').addClass('active')
+//   $('#loginbtn').removeClass('active')
+// }
+
+// Create the login modal that we will use later
+// $ionicModal.fromTemplateUrl('templates/login.html', {
+//   scope: $scope
+// }).then(function(modal) {
+//   $scope.modal = modal
+//   if (Boolean($window.localStorage.token) === false) {
+//     modal.show()
+//   }
+// })
+
+// Triggered in the login modal to close it
+// $scope.closeForms = function() {
+//   $scope.modal.hide()
+// }
+// Open the login modal
+// $scope.showForms = function() {
+//   $scope.modal.show()
+// }
 
 // var req = {
 //    method: 'POST',
