@@ -29,12 +29,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services']) 
   })
 })
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider,$ionicConfigProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
-
+  $ionicConfigProvider.tabs.position("bottom"); //Places them at the bottom for all OS
+  // $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same across all OS
 
   $stateProvider
 
@@ -76,7 +77,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services']) 
 
     .state('tab.home', {
       url: '/home',
-      cache: false,
+      // cache: false,
       views: {
         'tab-home': {
           templateUrl: 'templates/tab-home.html',

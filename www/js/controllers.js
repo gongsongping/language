@@ -83,6 +83,11 @@ angular.module('starter.controllers', [])
 .controller('HomeCtrl', function($scope, $http, $state, $rootScope, Post) {
 
   $scope.posts = Post.query()
+  $scope.doRefresh = function() {
+    $scope.posts = Post.query()
+    //Stop the ion-refresher from spinning
+    $scope.$broadcast('scroll.refreshComplete')
+  }
 
 })
 

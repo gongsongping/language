@@ -2,3 +2,20 @@
   .true {
     background-color: #C4F9FF;
   }
+.highlight{
+  height: 150px;
+  position: absolute;
+  top: 44px;
+  /*background: red;*/
+  width: 100%;
+  left: 0;
+  z-index: 5;
+}
+
+.highlight-top .tab-nav{
+  top:194px !important;
+}
+
+.has-highlight{
+  top:244px !important;
+}
