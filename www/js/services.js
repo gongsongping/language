@@ -1,4 +1,4 @@
-angular.module('starter.services', ['ngResource'])
+angular.module('starter.services', [])
 
 .factory('User', function($resource, $rootScope) {
   return $resource($rootScope.baseUrl + '/api/users/:id');

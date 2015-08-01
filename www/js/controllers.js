@@ -83,6 +83,10 @@ angular.module('starter.controllers', [])
 .controller('HomeCtrl', function($scope, $http, $state, $rootScope, Post) {
 
   $scope.posts = Post.query()
+  $scope.$on('writeUpdated', function(arguments) {
+    $scope.posts = Post.query()
+    console.log('broadwriteupdated')
+  })
   $scope.doRefresh = function() {
     $scope.posts = Post.query()
     //Stop the ion-refresher from spinning
@@ -97,6 +101,7 @@ angular.module('starter.controllers', [])
   $scope.sendPost = function() {
     var post = new Post($scope.post)
     post.$save(function(data) {
+      $rootScope.$broadcast('writeUpdated')
       $state.go('tab.home', {}, {reload: true})
     })
   }

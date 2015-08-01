@@ -5,7 +5,16 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services']) //'firebase',
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource']) //'firebase',
+// .constant("ENV", {
+//   // "name": "production",
+//   "accessToken": '',
+//   "debug": false,
+//   // "api": "http://ionichina.com/api/v1",
+//   "baseUrl": "http://localhost:3000",
+//   "appleId": 'id981408438',
+//   'version':'1.0.1'
+// })
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state) {
 
