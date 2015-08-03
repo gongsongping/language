@@ -43,7 +43,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
-  $ionicConfigProvider.tabs.position("bottom"); //Places them at the bottom for all OS
+  $ionicConfigProvider.tabs.position("bottom") //Places them at the bottom for all OS
   // $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same across all OS
 
   $stateProvider
@@ -53,7 +53,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: "/forms",
     // cache: false,
     // abstract: true,
-    templateUrl: "templates/forms.html",
+    templateUrl: "templates/forms-slide.html",
+    // templateUrl: "templates/forms.html",
     controller: 'AppCtrl'
   })
   .state('forms.login', {
@@ -86,7 +87,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     .state('tab.home', {
       url: '/home',
-      // cache: false,
+      cache: false,
       views: {
         'tab-home': {
           templateUrl: 'templates/tab-home.html',
@@ -96,7 +97,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     })
     .state('tab.home-user-id', {
       url: '/home/users/:id',
-      cache: false,
+      // cache: false,
       views: {
         'tab-home': {
           templateUrl: 'templates/home-user-id.html',

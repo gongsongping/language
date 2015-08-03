@@ -36,7 +36,7 @@ The Friends service returns an array of friend data
         <!-- <div> {{comment}}</div> -->
       </form>
     </div>
-    <div class="list card" ng-repeat="c in post.comments">
+    <div class="list card" ng-repeat="c in comments">
      <a href="#/tab/home/users/{{c.user.id}}">
      <div class="item item-avatar">
        <img src="mcfly.jpg">
@@ -47,5 +47,6 @@ The Friends service returns an array of friend data
        <p>{{c.content}}</p>
      </div>
    </div>
+   <ion-infinite-scroll on-infinite="loadMore()"></ion-infinite-scroll>
   </ion-content>
 </ion-view>

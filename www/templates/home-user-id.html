@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="list card" ng-repeat="p in user.posts">
+    <div class="list card" ng-repeat="p in posts">
      <a href="#/tab/home/posts/{{p.id}}">
      <div class="item item-body">
        <!-- <img class="full-image" src="delorean.jpg"> -->
@@ -46,6 +46,6 @@
        </a>
      </div>
    </div>
-
+   <ion-infinite-scroll on-infinite="loadMore()"></ion-infinite-scroll>
   </ion-content>
 </ion-view>

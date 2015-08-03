@@ -1,0 +1,56 @@
+<ion-slide-box on-slide-changed="slideHasChanged($index)">
+  <!-- <ion-slide-pager ng-click="nextSlide()"></ion-slide-pager> -->
+  <ion-slide>
+    <div class="box blue"><h1>BLUE</h1></div>
+    <div ng-show="loginErr" style="padding:10px; color:red;">{{loginErr}}</div>
+    <form ng-submit="doLogin()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="loginData.email">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="loginData.password">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Log in</button>
+        </label>
+      </div>
+    </form>
+    <!-- <button ng-click="nextSlide()">Next slide!</button> -->
+  </ion-slide>
+  <ion-slide>
+    <div class="box yellow"><h1>YELLOW</h1></div>
+    <div ng-show="signupErr" style="padding:10px; color:red;">{{signupErr}}</div>
+    <form ng-submit="doSignup()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="signupData.name">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="signupData.email">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="signupData.password">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password Confirmation</span>
+          <input type="password" ng-model="signupData.password_confirmation">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">sign up</button>
+        </label>
+      </div>
+    </form>
+  </ion-slide>
+  <ion-slide>
+    <div class="box pink"><h1>PINK</h1></div>
+    <button ng-click="nextSlide()">Next slide!</button>
+  </ion-slide>
+  <!-- <ion-slide-pager ng-click="doSomething($slideIndex)"></ion-slide-pager> -->
+
+</ion-slide-box>

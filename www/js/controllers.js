@@ -1,9 +1,12 @@
 angular.module('starter.controllers', [])
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $window, $http, $state, $rootScope, Session, User) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $window, $http, $state, $rootScope, Session, User, $ionicSlideBoxDelegate) {
   if ($window.localStorage.token) {
     $state.go('tab.home', {}, {reload: true})
   } else {
     $state.go('forms.login', {}, {reload: true})
+  }
+  $scope.nextSlide = function() {
+    $ionicSlideBoxDelegate.next()
   }
   // Form data for the login modal
   $scope.loginData = {email: "gongsongping@gmail.com", password: "gsp191954"}
@@ -81,16 +84,32 @@ angular.module('starter.controllers', [])
 })
 
 .controller('HomeCtrl', function($scope, $http, $state, $rootScope, Post) {
-
-  $scope.posts = Post.query()
-  $scope.$on('writeUpdated', function(arguments) {
-    $scope.posts = Post.query()
-    console.log('broadwriteupdated')
-  })
+  // var page = 0, lastId = 0
+  $scope.posts = []
   $scope.doRefresh = function() {
-    $scope.posts = Post.query()
-    //Stop the ion-refresher from spinning
-    $scope.$broadcast('scroll.refreshComplete')
+    $scope.page = 0
+    $scope.lastId = 1000000000
+    Post.query({page:0,lastId: $scope.lastId})
+    .$promise.then(function(data) {
+      $scope.posts = data
+      //Stop the ion-refresher from spinning
+      $scope.lastId = data[0].id
+      $scope.$broadcast('scroll.refreshComplete')
+    })
+  }
+  $scope.doRefresh()
+  // $scope.posts = Post.query()
+  $scope.$on('writeUpdated', function(arguments) {
+    $scope.doRefresh()
+  })
+  $scope.loadMore = function() {
+    $scope.page++
+    Post.query({page: $scope.page, lastId: $scope.lastId})
+    .$promise.then(function(data) {
+      $scope.posts = $scope.posts.concat(data)
+      //Stop the ion-refresher from spinning
+      $scope.$broadcast('scroll.infiniteScrollComplete')
+    })
   }
 
 })
@@ -101,18 +120,22 @@ angular.module('starter.controllers', [])
   $scope.sendPost = function() {
     var post = new Post($scope.post)
     post.$save(function(data) {
-      $rootScope.$broadcast('writeUpdated')
-      $state.go('tab.home', {}, {reload: true})
+      // $rootScope.$broadcast('writeUpdated')
+      $state.go('tab.home', null, {reload: true})
     })
   }
 })
 
 .controller('UserIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, $window, Post, Comment, User, Follow) {
   // $scope.user = User.get({id: $stateParams.uId})
-  User.get({id: $stateParams.id})
+  $scope.page = 0
+  $scope.lastId = 100000000
+  $scope.posts = []
+  User.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
   .$promise.then(function(data) {
     $scope.user = data.user
-    // $scope.posts = data.posts
+    $scope.posts = data.posts
+    $scope.lastId = data.posts[0].id
     $scope.foing = data.foing
     if ($window.localStorage.token == data.user.password) {
       $scope.isCurrentUser = true
@@ -121,6 +144,16 @@ angular.module('starter.controllers', [])
     }
     console.log(data.foing)
   })
+
+  $scope.loadMore = function() {
+    $scope.page++
+    User.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
+    .$promise.then(function(data) {
+      $scope.posts = $scope.posts.concat(data.posts)
+      //Stop the ion-refresher from spinning
+      $scope.$broadcast('scroll.infiniteScrollComplete')
+    })
+  }
 
   $scope.follow = function() {
     var fo = new Follow({id: $stateParams.id})
@@ -142,13 +175,24 @@ angular.module('starter.controllers', [])
 
 .controller('PostIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, Post, Comment) {
   $scope.comment = {"postId": $stateParams.id, "content":""}
-  // $scope.post =   Post.get({id: $stateParams.pId})
-  Post.get({id: $stateParams.id})
+  $scope.page = 0
+  $scope.lastId = 100000000
+  $scope.comments = []
+  Post.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
   .$promise.then(function(data) {
-    $scope.post = data
-    // $scope.comments = data.comments
-    // console.log($scope.data);
+    $scope.post = data.post
+    $scope.comments = data.comments
   })
+
+  $scope.loadMore = function() {
+    $scope.page++
+    Post.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
+    .$promise.then(function(data) {
+      $scope.comments = $scope.comments.concat(data.comments)
+      //Stop the ion-refresher from spinning
+      $scope.$broadcast('scroll.infiniteScrollComplete')
+    })
+  }
 
   $scope.sendComment = function() {
     var comment = new Comment($scope.comment)

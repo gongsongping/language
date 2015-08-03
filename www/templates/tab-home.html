@@ -1,4 +1,4 @@
-<ion-view view-title="Chats">
+<ion-view  view-title="Chats">
   <ion-content>
     <ion-refresher
     pulling-text="Pull to refresh..."
@@ -38,6 +38,6 @@
       </a>
     </div>
   </div>
-
+  <ion-infinite-scroll on-infinite="loadMore()"></ion-infinite-scroll>
 </ion-content>
 </ion-view>
