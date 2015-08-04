@@ -53,8 +53,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     url: "/forms",
     // cache: false,
     // abstract: true,
-    templateUrl: "templates/forms-slide.html",
-    // templateUrl: "templates/forms.html",
+    // templateUrl: "templates/forms-slide.html",
+    templateUrl: "templates/forms.html",
     controller: 'AppCtrl'
   })
   .state('forms.login', {

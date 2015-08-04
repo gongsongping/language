@@ -102,14 +102,18 @@ angular.module('starter.controllers', [])
   $scope.$on('writeUpdated', function(arguments) {
     $scope.doRefresh()
   })
+  $scope.dataLength = 5
   $scope.loadMore = function() {
-    $scope.page++
-    Post.query({page: $scope.page, lastId: $scope.lastId})
-    .$promise.then(function(data) {
-      $scope.posts = $scope.posts.concat(data)
-      //Stop the ion-refresher from spinning
-      $scope.$broadcast('scroll.infiniteScrollComplete')
-    })
+    if ($scope.dataLength){
+      $scope.page++
+      Post.query({page: $scope.page, lastId: $scope.lastId})
+      .$promise.then(function(data) {
+        $scope.dataLength = data.length
+        $scope.posts = $scope.posts.concat(data)
+        //Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.infiniteScrollComplete')
+      })
+    }
   }
 
 })
@@ -144,15 +148,19 @@ angular.module('starter.controllers', [])
     }
     console.log(data.foing)
   })
-
+  $scope.dataLength = 5
   $scope.loadMore = function() {
-    $scope.page++
-    User.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
-    .$promise.then(function(data) {
-      $scope.posts = $scope.posts.concat(data.posts)
-      //Stop the ion-refresher from spinning
-      $scope.$broadcast('scroll.infiniteScrollComplete')
-    })
+    if ($scope.dataLength) {
+      $scope.page++
+      User.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
+      .$promise.then(function(data) {
+        $scope.dataLength = data.posts.length
+        console.log(data.posts)
+        $scope.posts = $scope.posts.concat(data.posts)
+        //Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.infiniteScrollComplete')
+      })
+    }
   }
 
   $scope.follow = function() {
@@ -174,6 +182,7 @@ angular.module('starter.controllers', [])
 
 
 .controller('PostIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, Post, Comment) {
+  // $rootScope.moreData = true
   $scope.comment = {"postId": $stateParams.id, "content":""}
   $scope.page = 0
   $scope.lastId = 100000000
@@ -183,15 +192,19 @@ angular.module('starter.controllers', [])
     $scope.post = data.post
     $scope.comments = data.comments
   })
-
+  $scope.dataLength = 5
   $scope.loadMore = function() {
-    $scope.page++
-    Post.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
-    .$promise.then(function(data) {
-      $scope.comments = $scope.comments.concat(data.comments)
-      //Stop the ion-refresher from spinning
-      $scope.$broadcast('scroll.infiniteScrollComplete')
-    })
+    if ($scope.dataLength) {
+      $scope.page++
+      Post.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
+      .$promise.then(function(data) {
+        console.log(data.comments)
+        $scope.dataLength = data.comments.length
+        $scope.comments = $scope.comments.concat(data.comments)
+        //Stop the ion-refresher from spinning
+        $scope.$broadcast('scroll.infiniteScrollComplete')
+      })
+    }
   }
 
   $scope.sendComment = function() {
