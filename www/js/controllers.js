@@ -92,6 +92,7 @@ angular.module('starter.controllers', [])
     Post.query({page:0,lastId: $scope.lastId})
     .$promise.then(function(data) {
       $scope.posts = data
+      console.log(JSON.stringify(data))
       //Stop the ion-refresher from spinning
       $scope.lastId = data[0].id
       $scope.$broadcast('scroll.refreshComplete')
@@ -218,21 +219,30 @@ angular.module('starter.controllers', [])
 
 
 .controller('ChangeCtrl', function($scope, $http, $rootScope) {
-  // $scope.items = Items
-  // $scope.addItem = function() {
-  //   var name = prompt("What do you need to buy?")
-  //   if (name) {
-  //     $scope.items.$add({
-  //       "name": name
-  //     })
-  //   }
-  // }
+
 })
 
-.controller('MessageCtrl', function($scope,$http) {
+.controller('MessageCtrl', function($scope, $http, $rootScope) {
   $scope.settings = {
     enableFriends: true
   }
+  // $scope.btnLeft = true
+  // $scope.btnLeftState = function() {
+  //   $scope.btnLeft = true
+  //   $scope.btnRight = false
+  // }
+  // $scope.btnRightState = function() {
+  //   $scope.btnRight = true
+  //   $scope.btnLeft = false
+  // }
+  // $http.get('https://api.instagram.com/v1/users/32059698/media/recent?access_token=32059698.ab103e5.f453e42be7604101a895013328ec96af')
+  // .success(function(data, status, headers, config){
+  //   console.log(JSON.stringify(data.pagination))
+  //   $scope.photos = data
+  // })
+  // .error(function(data, status, headers, config){
+  //   alert(JSON.stringify(headers()))
+  // })
 })
 
 .controller('AccountCtrl', function($scope,$http) {

@@ -4,6 +4,12 @@
     <div class="">
       message message message
     </div>
+    <div class="button-bar">
+      <a class="button button-small" ng-class="{'active': true}" ui-sref-active="active"   ui-sref=".mes1">First</a>
+      <a class="button button-small"  ui-sref-active="active"  ui-sref=".mes2">Second</a>
+    </div>
+    <!-- <div ui-view="message-mes"> </div> "-->
+    <ion-nav-view name="message-mes"></ion-nav-view>
 
 </ion-content>
 </ion-view>

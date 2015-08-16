@@ -5,16 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource']) //'firebase',
-// .constant("ENV", {
-//   // "name": "production",
-//   "accessToken": '',
-//   "debug": false,
-//   // "api": "http://ionichina.com/api/v1",
-//   "baseUrl": "http://localhost:3000",
-//   "appleId": 'id981408438',
-//   'version':'1.0.1'
-// })
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ng-mfb']) //'firebase',
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state) {
 
@@ -161,7 +152,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
     views: {
       'tab-message': {
         templateUrl: 'templates/tab-message.html',
+        // abstract: true,
         controller: 'MessageCtrl'
+      },
+      'message-mes@tab.message': {
+        templateUrl: 'templates/mes1.html'
+        // controller: 'MessageCtrl'
+      }
+    }
+  })
+  .state('tab.message.mes1', {
+    url: '/mes1',
+    views: {
+      'message-mes@tab.message': {
+        templateUrl: 'templates/mes1.html'
+        // controller: 'MessageCtrl'
+      }
+    }
+  })
+  .state('tab.message.mes2', {
+    url: '/mes2',
+    views: {
+      'message-mes@tab.message': {
+        templateUrl: 'templates/mes2.html'
+        // controller: 'MessageCtrl'
       }
     }
   })
