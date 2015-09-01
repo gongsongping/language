@@ -86,6 +86,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
+    // .state('tab.home', {
+    //   url: '/home',
+    //   cache: false,
+    //   views: {
+    //     'tab-home': {
+    //       templateUrl: 'templates/home-nav.html',
+    //       controller: 'HomeCtrl'
+    //     },
+    //     '@tab.home': {
+    //       templateUrl: 'templates/tab-home.html',
+    //       controller: 'HomeCtrl'
+    //     }
+    //   }
+    // })
     .state('tab.home-user-id', {
       url: '/home/users/:id',
       // cache: false,
@@ -96,6 +110,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
+    // .state('tab.home.user-id', {
+    //   url: '/users/:id',
+    //   // cache: false,
+    //   views: {
+    //     '@tab.home': {
+    //       templateUrl: 'templates/home-user-id.html',
+    //       controller: 'UserIdCtrl'
+    //     }
+    //   }
+    // })
     .state('tab.home-post-id', {
       url: '/home/posts/:id',
       cache: false,
@@ -106,6 +130,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
+    // .state('tab.home.post-id', {
+    //   url: '/posts/:id',
+    //   cache: false,
+    //   views: {
+    //     '': {
+    //       templateUrl: 'templates/home-post-id.html',
+    //       controller: 'PostIdCtrl'
+    //     }
+    //   }
+    // })
   .state('tab.write', {
     url: '/write',
     cache: false,
