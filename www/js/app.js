@@ -5,11 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ng-mfb']) //'firebase',
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource']) //'firebase',
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state) {
 
-  $rootScope.baseUrl = "http://localhost:3000"
+  $rootScope.baseUrl = "http://localhost:9000"
   // $rootScope.baseUrl = "http://104.131.150.241"
   console.log($window.localStorage.token)
   if ($window.localStorage.token) {

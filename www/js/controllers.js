@@ -84,36 +84,26 @@ angular.module('starter.controllers', [])
 })
 
 .controller('HomeCtrl', function($scope, $http, $state, $rootScope, Post) {
-  // var page = 0, lastId = 0
   $scope.posts = []
-  $scope.doRefresh = function() {
-    $scope.page = 0
-    $scope.lastId = 1000000000
-    Post.query({page:0,lastId: $scope.lastId})
-    .$promise.then(function(data) {
-      $scope.posts = data
-      console.log(JSON.stringify(data))
-      //Stop the ion-refresher from spinning
-      $scope.lastId = data[0].id
-      $scope.$broadcast('scroll.refreshComplete')
-    })
-  }
-  $scope.doRefresh()
-  // $scope.posts = Post.query()
-  $scope.$on('writeUpdated', function(arguments) {
-    $scope.doRefresh()
-  })
-  $scope.dataLength = 5
+  $scope.page = 0
+  $scope.lastId = 0
+  $scope.limit = 5
+  $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
-    if ($scope.dataLength){
-      $scope.page++
+    if ($scope.dataLength == $scope.limit){
+      // $scope.page++
+      // $scope.page += 1
       Post.query({page: $scope.page, lastId: $scope.lastId})
       .$promise.then(function(data) {
+        console.log(JSON.stringify(data))
         $scope.dataLength = data.length
         $scope.posts = $scope.posts.concat(data)
         //Stop the ion-refresher from spinning
+        $scope.page += 1
+        if (data.length == $scope.limit) {$scope.lastId = data[$scope.limit-1].id}
         $scope.$broadcast('scroll.infiniteScrollComplete')
       })
+      // $scope.$broadcast('scroll.infiniteScrollComplete')
     }
   }
 
@@ -133,31 +123,30 @@ angular.module('starter.controllers', [])
 
 .controller('UserIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, $window, Post, Comment, User, Follow) {
   // $scope.user = User.get({id: $stateParams.uId})
-  $scope.page = 0
-  $scope.lastId = 100000000
   $scope.posts = []
-  User.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
-  .$promise.then(function(data) {
-    $scope.user = data.user
-    $scope.posts = data.posts
-    $scope.lastId = data.posts[0].id
-    $scope.foing = data.foing
-    if ($window.localStorage.token == data.user.password) {
-      $scope.isCurrentUser = true
-    } else {
-      $scope.isCurrentUser = false
-    }
-    console.log(data.foing)
-  })
-  $scope.dataLength = 5
+  $scope.page = 0
+  $scope.lastId = 0
+  $scope.limit = 5
+  $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
-    if ($scope.dataLength) {
-      $scope.page++
+    if ($scope.dataLength == $scope.limit) {
+      // $scope.page++
       User.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
       .$promise.then(function(data) {
+        console.log(JSON.stringify(data))
         $scope.dataLength = data.posts.length
-        console.log(data.posts)
+        if (  $scope.page == 0){
+            $scope.user = data.user
+            $scope.foing = data.foing
+            if ($window.localStorage.token == data.user.password_digest) {
+              $scope.isCurrentUser = true
+            } else {
+              $scope.isCurrentUser = false
+            }
+        }
         $scope.posts = $scope.posts.concat(data.posts)
+        if (data.posts.length == $scope.limit) {$scope.lastId = data.posts[$scope.limit-1].id}
+        $scope.page += 1
         //Stop the ion-refresher from spinning
         $scope.$broadcast('scroll.infiniteScrollComplete')
       })
@@ -185,28 +174,28 @@ angular.module('starter.controllers', [])
 .controller('PostIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, Post, Comment) {
   // $rootScope.moreData = true
   $scope.comment = {"postId": $stateParams.id, "content":""}
-  $scope.page = 0
-  $scope.lastId = 100000000
   $scope.comments = []
-  Post.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
-  .$promise.then(function(data) {
-    $scope.post = data.post
-    $scope.comments = data.comments
-  })
-  $scope.dataLength = 5
+  $scope.page = 0
+  $scope.lastId = 0
+  $scope.limit = 5
+  $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
-    if ($scope.dataLength) {
-      $scope.page++
+    if ($scope.dataLength == $scope.limit) {
+      // $scope.page++
       Post.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
       .$promise.then(function(data) {
-        console.log(data.comments)
+        console.log(JSON.stringify(data))
         $scope.dataLength = data.comments.length
+        if ($scope.page == 0){ $scope.post = data.post }
+        if (data.comments.length == $scope.limit) {$scope.lastId = data.comments[$scope.limit-1].id}
         $scope.comments = $scope.comments.concat(data.comments)
+        $scope.page += 1
         //Stop the ion-refresher from spinning
         $scope.$broadcast('scroll.infiniteScrollComplete')
       })
     }
   }
+  $scope.loadMore()
 
   $scope.sendComment = function() {
     var comment = new Comment($scope.comment)
@@ -226,23 +215,7 @@ angular.module('starter.controllers', [])
   $scope.settings = {
     enableFriends: true
   }
-  // $scope.btnLeft = true
-  // $scope.btnLeftState = function() {
-  //   $scope.btnLeft = true
-  //   $scope.btnRight = false
-  // }
-  // $scope.btnRightState = function() {
-  //   $scope.btnRight = true
-  //   $scope.btnLeft = false
-  // }
-  // $http.get('https://api.instagram.com/v1/users/32059698/media/recent?access_token=32059698.ab103e5.f453e42be7604101a895013328ec96af')
-  // .success(function(data, status, headers, config){
-  //   console.log(JSON.stringify(data.pagination))
-  //   $scope.photos = data
-  // })
-  // .error(function(data, status, headers, config){
-  //   alert(JSON.stringify(headers()))
-  // })
+
 })
 
 .controller('AccountCtrl', function($scope,$http) {
@@ -250,6 +223,112 @@ angular.module('starter.controllers', [])
     enableFriends: true
   }
 })
+
+// $scope.page = 0
+// $scope.lastId = 100000000
+// Post.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
+// .$promise.then(function(data) {
+//   console.log(JSON.stringify(data))
+//   $scope.post = data.post
+//   $scope.comments = data.comments
+// })
+// $scope.dataLength = 5
+// $scope.loadMore = function() {
+//   if ($scope.dataLength) {
+//     $scope.page++
+//     Post.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
+//     .$promise.then(function(data) {
+//       console.log(data.comments)
+//       $scope.dataLength = data.comments.length
+//       $scope.comments = $scope.comments.concat(data.comments)
+//       //Stop the ion-refresher from spinning
+//       $scope.$broadcast('scroll.infiniteScrollComplete')
+//     })
+//   }
+// }
+
+
+// $scope.page = 0
+// $scope.lastId = 100000000
+// $scope.posts = []
+// User.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
+// .$promise.then(function(data) {
+//   console.log(JSON.stringify(data))
+//   $scope.user = data.user
+//   $scope.posts = data.posts
+//   $scope.lastId = data.posts[0].id
+//   $scope.foing = data.foing
+//   if ($window.localStorage.token == data.user.password_digest) {
+//     $scope.isCurrentUser = true
+//   } else {
+//     $scope.isCurrentUser = false
+//   }
+//   console.log(data.foing)
+// })
+// $scope.dataLength = 5
+// $scope.loadMore = function() {
+//   if ($scope.dataLength) {
+//     $scope.page++
+//     User.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
+//     .$promise.then(function(data) {
+//       $scope.dataLength = data.posts.length
+//       console.log(data.posts)
+//       $scope.posts = $scope.posts.concat(data.posts)
+//       //Stop the ion-refresher from spinning
+//       $scope.$broadcast('scroll.infiniteScrollComplete')
+//     })
+//   }
+// }
+
+// $scope.doRefresh = function() {
+//   $scope.page = 0
+//   $scope.lastId = 1000000000
+//   Post.query({page:0,lastId: $scope.lastId})
+//   .$promise.then(function(data) {
+//     $scope.posts = data
+//     console.log(JSON.stringify(data))
+//     //Stop the ion-refresher from spinning
+//     $scope.lastId = data[0].id
+//     // $scope.$broadcast('scroll.refreshComplete')
+//   })
+// }
+// $scope.doRefresh()
+// // $scope.posts = Post.query()
+// $scope.$on('writeUpdated', function(arguments) {
+//   $scope.doRefresh()
+// })
+// $scope.dataLength = 5
+// $scope.loadMore = function() {
+//   if ($scope.dataLength){
+//     // $scope.page++
+//     $scope.page += 1
+//     Post.query({page: $scope.page, lastId: $scope.lastId})
+//     .$promise.then(function(data) {
+//       $scope.dataLength = data.length
+//       $scope.posts = $scope.posts.concat(data)
+//       //Stop the ion-refresher from spinning
+//       $scope.$broadcast('scroll.infiniteScrollComplete')
+//     })
+//   }
+// }
+
+// $scope.btnLeft = true
+// $scope.btnLeftState = function() {
+//   $scope.btnLeft = true
+//   $scope.btnRight = false
+// }
+// $scope.btnRightState = function() {
+//   $scope.btnRight = true
+//   $scope.btnLeft = false
+// }
+// $http.get('https://api.instagram.com/v1/users/32059698/media/recent?access_token=32059698.ab103e5.f453e42be7604101a895013328ec96af')
+// .success(function(data, status, headers, config){
+//   console.log(JSON.stringify(data.pagination))
+//   $scope.photos = data
+// })
+// .error(function(data, status, headers, config){
+//   alert(JSON.stringify(headers()))
+// })
 
 // $scope.activateLoginForm = function() {
 //   $scope.loginForm = true

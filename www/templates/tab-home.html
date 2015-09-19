@@ -40,6 +40,6 @@
     </div>
   </div>
 
-  <ion-infinite-scroll ng-if="dataLength" on-infinite="loadMore()"></ion-infinite-scroll>
+  <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll>
 </ion-content>
 </ion-view>
