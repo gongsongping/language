@@ -9,8 +9,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state) {
 
-  $rootScope.baseUrl = "http://localhost:9000"
-  // $rootScope.baseUrl = "http://104.131.150.241"
+  // $rootScope.baseUrl = "http://localhost:9000"
+  $rootScope.baseUrl = "http://162.243.143.15"
   console.log($window.localStorage.token)
   if ($window.localStorage.token) {
     $http.defaults.headers.common["Authorization"] = "Token token=" + $window.localStorage.token

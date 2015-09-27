@@ -195,7 +195,7 @@ angular.module('starter.controllers', [])
       })
     }
   }
-  $scope.loadMore()
+  // $scope.loadMore()
 
   $scope.sendComment = function() {
     var comment = new Comment($scope.comment)
