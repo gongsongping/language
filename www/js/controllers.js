@@ -8,9 +8,29 @@ angular.module('starter.controllers', [])
   $scope.nextSlide = function() {
     $ionicSlideBoxDelegate.next()
   }
-  // Form data for the login modal
-  $scope.loginData = {email: "gongsongping@gmail.com", password: "gsp191954"}
   $scope.currentUser = Boolean($window.localStorage.token)
+  // Form data for the login modal
+
+  $scope.logout = function() {
+    $window.localStorage.token = ''
+    $scope.currentUser = Boolean($window.localStorage.token)
+    $http.defaults.headers.common['Authorization'] = ''
+    console.log($window.localStorage.token)
+    $rootScope.loginErr = ''
+    $rootScope.signupErr = ''
+    // window.location.reload()
+    // $window.location.reload(true);
+    // $state.go($state.current, {}, {reload: true});
+    // $state.go('tab.account', {}, {reload: true});
+    // $scope.showForms()
+    $state.go('forms.login', {}, {reload: true})
+
+  }
+
+})
+
+.controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User) {
+  $scope.loginData = {email: "gsp@gmail.com", password: "191954"}
   $scope.signupData = {name:'gsp'}
 
   // $scope.loginForm = true
@@ -39,21 +59,6 @@ angular.module('starter.controllers', [])
     })
 
   }
-  $scope.logout = function() {
-    $window.localStorage.token = ''
-    $scope.currentUser = Boolean($window.localStorage.token)
-    $http.defaults.headers.common['Authorization'] = ''
-    console.log($window.localStorage.token)
-    $rootScope.loginErr = ''
-    $rootScope.signupErr = ''
-    // window.location.reload()
-    // $window.location.reload(true);
-    // $state.go($state.current, {}, {reload: true});
-    // $state.go('tab.account', {}, {reload: true});
-    // $scope.showForms()
-    $state.go('forms.login', {}, {reload: true})
-
-  }
 
   $scope.doSignup = function() {
     var user = new User($scope.signupData)
@@ -78,12 +83,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User) {
-
-
-})
-
-.controller('HomeCtrl', function($scope, $http, $state, $rootScope, Post) {
+.controller('HomeCtrl', function($scope, $http, $state, $rootScope, $window, Post) {
   $scope.posts = []
   $scope.page = 0
   $scope.lastId = 0
@@ -91,7 +91,6 @@ angular.module('starter.controllers', [])
   $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
     if ($scope.dataLength == $scope.limit){
-      // $scope.page++
       // $scope.page += 1
       Post.query({page: $scope.page, lastId: $scope.lastId})
       .$promise.then(function(data) {
@@ -105,6 +104,13 @@ angular.module('starter.controllers', [])
       })
       // $scope.$broadcast('scroll.infiniteScrollComplete')
     }
+  }
+
+  $scope.doRefresh = function() {
+    // $state.go('tab.home', null, {reload: true})
+    // $window.location.reload(true)
+    $state.go($state.current, {}, {reload: true})
+    $scope.$broadcast('scroll.refreshComplete')
   }
 
 })
@@ -171,7 +177,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('PostIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, Post, Comment) {
+.controller('PostIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, $window, Post, Comment) {
   // $rootScope.moreData = true
   $scope.comment = {"postId": $stateParams.id, "content":""}
   $scope.comments = []
@@ -202,6 +208,7 @@ angular.module('starter.controllers', [])
     comment.$save(function(data) {
       console.log(JSON.stringify(data))
       $state.go($state.current, {}, {reload: true})
+      // $window.location.reload(true)
     })
   }
 })

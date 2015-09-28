@@ -9,7 +9,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state) {
 
-  // $rootScope.baseUrl = "http://localhost:9000"
+//   $rootScope.baseUrl = "http://localhost:9000"
   $rootScope.baseUrl = "http://162.243.143.15"
   console.log($window.localStorage.token)
   if ($window.localStorage.token) {
@@ -36,37 +36,44 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   // Each state's controller can be found in controllers.js
   $ionicConfigProvider.tabs.position("bottom") //Places them at the bottom for all OS
   // $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same across all OS
-
   $stateProvider
-
   // setup an abstract state for the tabs directive
   .state('forms', {
     url: "/forms",
     // cache: false,
     // abstract: true,
-    // templateUrl: "templates/forms-slide.html",
-    templateUrl: "templates/forms.html",
-    controller: 'AppCtrl'
+    views: {
+      '@': {
+        templateUrl: 'templates/forms.html',
+        controller: 'FormsCtrl'
+      }
+      // ,
+      // 'form@forms': {
+      //   templateUrl: 'templates/form-login.html'
+      // }
+    }
   })
+
   .state('forms.login', {
     url: '/login',
-    cache: false,
+    // cache: false,
     views: {
-      'form-login': {
+      'form': {
         templateUrl: 'templates/form-login.html'
       }
     }
   })
+
   .state('forms.signup', {
     url: '/signup',
-    cache: false,
+    // cache: false,
     views: {
-      'form-signup': {
+      'form': {
         templateUrl: 'templates/form-signup.html'
-        // controller: 'ChangeCtrl'
       }
     }
   })
+
   .state('tab', {
     url: "/tab",
     abstract: true,
@@ -75,7 +82,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
 
   // Each tab has its own nav history stack:
-
     .state('tab.home', {
       url: '/home',
       cache: false,
@@ -86,20 +92,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
-    // .state('tab.home', {
-    //   url: '/home',
-    //   cache: false,
-    //   views: {
-    //     'tab-home': {
-    //       templateUrl: 'templates/home-nav.html',
-    //       controller: 'HomeCtrl'
-    //     },
-    //     '@tab.home': {
-    //       templateUrl: 'templates/tab-home.html',
-    //       controller: 'HomeCtrl'
-    //     }
-    //   }
-    // })
+
     .state('tab.home-user-id', {
       url: '/home/users/:id',
       // cache: false,
@@ -110,16 +103,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
-    // .state('tab.home.user-id', {
-    //   url: '/users/:id',
-    //   // cache: false,
-    //   views: {
-    //     '@tab.home': {
-    //       templateUrl: 'templates/home-user-id.html',
-    //       controller: 'UserIdCtrl'
-    //     }
-    //   }
-    // })
+
     .state('tab.home-post-id', {
       url: '/home/posts/:id',
       cache: false,
@@ -130,16 +114,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
         }
       }
     })
-    // .state('tab.home.post-id', {
-    //   url: '/posts/:id',
-    //   cache: false,
-    //   views: {
-    //     '': {
-    //       templateUrl: 'templates/home-post-id.html',
-    //       controller: 'PostIdCtrl'
-    //     }
-    //   }
-    // })
+
   .state('tab.write', {
     url: '/write',
     cache: false,
@@ -183,20 +158,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
   .state('tab.message', {
     url: '/message',
+    // cache: false,
+    abstract: true,
     views: {
       'tab-message': {
         templateUrl: 'templates/tab-message.html',
         // abstract: true,
         controller: 'MessageCtrl'
-      },
-      'message-mes@tab.message': {
-        templateUrl: 'templates/mes1.html'
-        // controller: 'MessageCtrl'
       }
+      // ,
+      // 'message-mes@tab.message': {
+      //   templateUrl: 'templates/mes1.html'
+      //   // controller: 'MessageCtrl'
+      // }
     }
   })
   .state('tab.message.mes1', {
     url: '/mes1',
+    // cache: false,
     views: {
       'message-mes@tab.message': {
         templateUrl: 'templates/mes1.html'
@@ -206,6 +185,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
   .state('tab.message.mes2', {
     url: '/mes2',
+    // cache: false,
     views: {
       'message-mes@tab.message': {
         templateUrl: 'templates/mes2.html'
@@ -227,3 +207,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   $urlRouterProvider.otherwise('/tab/home');
 
 });
+
+// .state('forms', {
+//   url: "/forms",
+//   // cache: false,
+//   // abstract: true,
+//   // templateUrl: "templates/forms-slide.html",
+//   templateUrl: "templates/forms.html",
+//   controller: 'AppCtrl'
+// })
+// .state('forms.login', {
+//   url: '/login',
+//   cache: false,
+//   views: {
+//     'form-login': {
+//       templateUrl: 'templates/form-login.html'
+//     }
+//   }
+// })
+// .state('forms.signup', {
+//   url: '/signup',
+//   cache: false,
+//   views: {
+//     'form-signup': {
+//       templateUrl: 'templates/form-signup.html'
+//       // controller: 'ChangeCtrl'
+//     }
+//   }
+// })

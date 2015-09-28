@@ -1,3 +1,4 @@
+sudo npm install -g ionic cordova
 ionic platform update ios
 ionic platform update android
 ionic build android
