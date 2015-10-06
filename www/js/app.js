@@ -35,6 +35,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $ionicConfigProvider.tabs.position("bottom") //Places them at the bottom for all OS
+  $ionicConfigProvider.views.swipeBackEnabled(false)
   // $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same across all OS
   $stateProvider
   // setup an abstract state for the tabs directive
@@ -106,7 +107,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     .state('tab.home-post-id', {
       url: '/home/posts/:id',
-      cache: false,
+      // cache: false,
       views: {
         'tab-home': {
           templateUrl: 'templates/home-post-id.html',

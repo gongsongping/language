@@ -130,6 +130,7 @@ angular.module('starter.controllers', [])
 .controller('UserIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, $window, Post, Comment, User, Follow) {
   // $scope.user = User.get({id: $stateParams.uId})
   $scope.posts = []
+  $scope.isCurrentUser = true
   $scope.page = 0
   $scope.lastId = 0
   $scope.limit = 5
