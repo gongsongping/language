@@ -219,17 +219,91 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('MessageCtrl', function($scope, $http, $rootScope) {
-  $scope.settings = {
-    enableFriends: true
-  }
+.controller('MessageCtrl', function($scope, $http, $rootScope,$cordovaCamera,$cordovaCapture, $cordovaImagePicker) {
+   $scope.choosePicture = function() {
+     var options = {
+         quality : 75,
+         destinationType : Camera.DestinationType.DATA_URL,
+        //  sourceType : Camera.PictureSourceType.CAMERA,
+         sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+         allowEdit : true,
+         encodingType: Camera.EncodingType.JPEG,
+         targetWidth: 300,
+         targetHeight: 300,
+         popoverOptions: CameraPopoverOptions,
+         saveToPhotoAlbum: false
+     }
+
+     $cordovaCamera.getPicture(options).then(function(imageData) {
+         $scope.imgURI = "data:image/jpeg;base64," + imageData;
+     }, function(err) {
+         // An error occured. Show a message to the user
+     })
+   }
+
+   $scope.capture = function() {
+      var options = { limit: 3 };
+      $cordovaCapture.captureImage(options).then(function(imageData) {
+        $scope.imgURI = "data:image/jpeg;base64," + imageData;
+      }, function(err) {
+        // An error occurred. Show a message to the user
+      })
+   }
+
+   $scope.choose = function() {
+      var options = {
+       maximumImagesCount: 10,
+       width: 800,
+       height: 800,
+       quality: 80
+      }
+      $cordovaImagePicker.getPictures(options)
+      .then(function (results) {
+        $scope.imgURI = results[1]
+        // for (var i = 0; i < results.length; i++) {
+        //   console.log('Image URI: ' + results[i]);
+        //   $scope.imgURI = "data:image/jpeg;base64," + imageData;
+        // }
+      }, function(error) {
+        // error getting photos
+      })
+   }
 
 })
 
-.controller('AccountCtrl', function($scope,$http) {
+.controller('AccountCtrl', function($scope,$http,$cordovaCamera,$cordovaCapture) {
   $scope.settings = {
     enableFriends: true
   }
+  $scope.takePicture = function() {
+     var options = {
+         quality : 75,
+         destinationType : Camera.DestinationType.DATA_URL,
+         sourceType : Camera.PictureSourceType.CAMERA,
+        //  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+         allowEdit : true,
+         encodingType: Camera.EncodingType.JPEG,
+         targetWidth: 300,
+         targetHeight: 300,
+         popoverOptions: CameraPopoverOptions,
+         saveToPhotoAlbum: false
+     }
+
+     $cordovaCamera.getPicture(options).then(function(imageData) {
+         $scope.imgURI = "data:image/jpeg;base64," + imageData;
+     }, function(err) {
+         // An error occured. Show a message to the user
+     })
+   }
+
+   $scope.capture = function() {
+      var options = { limit: 3 };
+      $cordovaCapture.captureImage(options).then(function(imageData) {
+        $scope.imgURI = "data:image/jpeg;base64," + imageData;
+      }, function(err) {
+        // An error occurred. Show a message to the user
+      })
+   }
 })
 
 // $scope.page = 0

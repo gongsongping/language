@@ -1,9 +1,14 @@
 # sudo npm install -g ionic cordova
 ionic platform update ios
-# ionic platform update android
-# ionic build android
-# ionic platform add ios
+ionic platform update android
+ionic build android
 # ionic platform rm ios
+# ionic platform add ios
+# ionic platform rm android
+# ionic platform add android
+# ionic build android
+
+
 # ionic platform add android
 # "ionic": "driftyco/ionic-bower#1.0.0-beta.4"
 # To this:

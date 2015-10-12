@@ -10,9 +10,11 @@
         Enable Friends
     </ion-toggle>
     </ion-list>
-
-
-    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+    <button class="button" ng-click="capture()">capture</button>
+    <button class="button" ng-click="takePicture()">Take Picture</button>
+    <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+    <img ng-show="imgURI === undefined" ng-src="http://placehold.it/300x300">
+    <!-- <ion-slide-box on-slide-changed="slideHasChanged($index)">
       <ion-slide>
         <div class="box blue"><h1>BLUE</h1></div>
       </ion-slide>
@@ -22,7 +24,7 @@
       <ion-slide>
         <div class="box pink"><h1>PINK</h1></div>
       </ion-slide>
-    </ion-slide-box>
+    </ion-slide-box> -->
     <!-- <nav mfb-menu position="tr" effect="zoomin" label="hover here"
          active-icon="ion-edit" resting-icon="ion-plus-round"
          toggling-method="click">
