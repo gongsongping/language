@@ -219,7 +219,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('MessageCtrl', function($scope, $http, $rootScope,$cordovaCamera,$cordovaCapture, $cordovaImagePicker) {
+.controller('MessageCtrl', function($scope, $http, $rootScope,$cordovaCamera,$cordovaCapture, $cordovaImagePicker,Restangular,$resource) {
    $scope.choosePicture = function() {
      var options = {
          quality : 75,
@@ -240,13 +240,19 @@ angular.module('starter.controllers', [])
          // An error occured. Show a message to the user
      })
    }
-
+  var Po = $resource('http://localhost:3000/sina/test')
    $scope.capture = function() {
-      var options = { limit: 3 };
-      $cordovaCapture.captureImage(options).then(function(imageData) {
-        $scope.imgURI = "data:image/jpeg;base64," + imageData;
-      }, function(err) {
-        // An error occurred. Show a message to the user
+      // var options = { limit: 3 };
+      // $cordovaCapture.captureImage(options).then(function(imageData) {
+      //   $scope.imgURI = "data:image/jpeg;base64," + imageData;
+      // }, function(err) {
+      //   // An error occurred. Show a message to the user
+      // })
+      var p = new Po({"suc":"dddddd"})
+      p.$save(function(data) {
+        console.log(JSON.stringify(data))
+        // $state.go($state.current, {}, {reload: true})
+        // $window.location.reload(true)
       })
    }
 
