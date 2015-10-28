@@ -5,12 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ngCordova','restangular']) //'firebase',
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ngCordova','ngIOS9UIWebViewPatch']) //'firebase',
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state) {
 
-  $rootScope.baseUrl = "http://localhost:3000"
-  // $rootScope.baseUrl = "http://162.243.143.15"
+//  $rootScope.baseUrl = "http://localhost:3000"
+   $rootScope.baseUrl = "http://162.243.143.15"
   console.log($window.localStorage.token)
   if ($window.localStorage.token) {
     $http.defaults.headers.common["Authorization"] = "Token token=" + $window.localStorage.token
@@ -29,7 +29,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   })
 })
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider,$ionicConfigProvider,RestangularProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider,$ionicConfigProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -37,7 +37,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   // RestangularProvider.setBaseUrl("http://162.243.143.15/api")
   // RestangularProvider.setBaseUrl("http://localhost:3000/api")
   $ionicConfigProvider.tabs.position("bottom") //Places them at the bottom for all OS
-  $ionicConfigProvider.views.swipeBackEnabled(false)
+   $ionicConfigProvider.views.swipeBackEnabled(false)
   // $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same across all OS
   $stateProvider
   // setup an abstract state for the tabs directive

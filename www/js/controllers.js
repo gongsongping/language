@@ -219,15 +219,22 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('MessageCtrl', function($scope, $http, $rootScope,$cordovaCamera,$cordovaCapture, $cordovaImagePicker,Restangular,$resource,$window) {
+.controller('MessageCtrl', function($scope, $http, $rootScope,$cordovaCamera,$cordovaCapture, $cordovaImagePicker,Restangular,$resource,$cordovaInAppBrowser) {
   $scope.openInExternalBrowser = function(){
     // Open in external browser
     window.open('http://162.243.143.15','_system','location=yes');
   }
 
+
   $scope.openInAppBrowser = function(){
     // Open in app browser
-    window.open('http://162.243.143.15','_blank');
+    // window.open('http://162.243.143.15','_blank');
+    var options = {location: 'yes', clearcache: 'yes',toolbar: 'yes'}
+    $cordovaInAppBrowser.open('http://162.243.143.15', '_blank', options)
+    .then(function(event) {
+        // success
+    }).catch(function(event) {})
+    // $cordovaInAppBrowser.close()
   }
 
   $scope.openCordovaWebView = function(){
