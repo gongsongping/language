@@ -116,7 +116,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('WriteCtrl', function($scope, $http, Qiniu, $state, $rootScope, Post) {
-  Qiniu.qiniu()
+  // Qiniu.qiniu()
   $scope.post = {}
   $scope.sendPost = function() {
     var post = new Post($scope.post)
