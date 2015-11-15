@@ -11,25 +11,25 @@ require 'mina/git'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :domain, 'changiif.com'
-set :deploy_to, '/home/gsp/wd/rails-do/public/pgtab'
+set :deploy_to, '/home/gsp/wd/change/public/pgtab'
 set :repository, 'git://...'
 set :branch, 'master'
 set :user, 'gsp'
 
-
 task :scp do
   to :before_hook do
     queue 'cd www'
-    queue 'tar -cf www.tar.gz .'
-    queue 'scp www.tar.gz gsp@changiif.com:/home/gsp/wd/rails-do/public/pgtab'
+    queue 'tar -zcvf www.tar.gz .'
+    queue "scp www.tar.gz gsp@changiif.com:#{deploy_to}"
     queue 'rm www.tar.gz'
   end
   queue 'ls'
   # queue 'tar -zxvf www.tar.gz'
   # queue 'rm www.tar.gz'
-  in_directory './wd/rails-do/public/pgtab' do
-    queue %[tar -xf www.tar.gz]
+  in_directory "#{deploy_to}" do
+    queue %[tar -zxvf www.tar.gz]
     queue 'rm www.tar.gz'
+    queue 'nano index.html'
   end
 end
 # For system-wide RVM install.
