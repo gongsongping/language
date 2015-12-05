@@ -11,7 +11,8 @@ require 'mina/git'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :domain, 'changiif.com'
-set :deploy_to, '/home/gsp/wd/change/public/pgtab'
+set :deploy_to, '/home/gsp/wd/change/public'
+# set :deploy_to, '/home/gsp/wd/change/public/language'
 set :repository, 'git://...'
 set :branch, 'master'
 set :user, 'gsp'

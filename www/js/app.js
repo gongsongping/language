@@ -9,9 +9,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state) {
 
- $rootScope.baseUrl = "http://localhost:3000"
+ // $rootScope.baseUrl = "http://localhost:3000"
   //  $rootScope.baseUrl = "http://162.243.143.15"
-  //  $rootScope.baseUrl = "http://changiif.com"
+   $rootScope.baseUrl = "http://changiif.com"
 
   console.log($window.localStorage.token)
   if ($window.localStorage.token) {
@@ -43,38 +43,45 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   // $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same across all OS
   $stateProvider
   // setup an abstract state for the tabs directive
+
   .state('forms', {
     url: "/forms",
     // cache: false,
-    // abstract: true,
     views: {
       '@': {
         templateUrl: 'templates/forms.html',
         controller: 'FormsCtrl'
       }
-      // ,
-      // 'form@forms': {
-      //   templateUrl: 'templates/form-login.html'
-      // }
     }
   })
+  // .state('forms-user-id', {
+  //   url: "/forms/users/:id",
+  //   views: {
+  //     '@': {
+  //       templateUrl: 'templates/forms-user-id.html',
+  //       controller: 'FormsCtrl'
+  //     }
+  //   }
+  // })
 
-  .state('forms.login', {
+  .state('login', {
     url: '/login',
     // cache: false,
     views: {
-      'form': {
-        templateUrl: 'templates/form-login.html'
+      '@': {
+        templateUrl: 'templates/form-login.html',
+        controller: 'FormsCtrl'
       }
     }
   })
 
-  .state('forms.signup', {
+  .state('signup', {
     url: '/signup',
     // cache: false,
     views: {
-      'form': {
-        templateUrl: 'templates/form-signup.html'
+      '@': {
+        templateUrl: 'templates/form-signup.html',
+        controller: 'FormsCtrl'
       }
     }
   })

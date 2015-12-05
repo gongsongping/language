@@ -3,10 +3,7 @@ angular.module('starter.controllers', [])
   if ($window.localStorage.token) {
     $state.go('tab.home', {}, {reload: true})
   } else {
-    $state.go('forms.login', {}, {reload: true})
-  }
-  $scope.nextSlide = function() {
-    $ionicSlideBoxDelegate.next()
+    $state.go('forms', {}, {reload: true})
   }
   $scope.currentUser = Boolean($window.localStorage.token)
   // Form data for the login modal
@@ -23,7 +20,7 @@ angular.module('starter.controllers', [])
     // $state.go($state.current, {}, {reload: true});
     // $state.go('tab.account', {}, {reload: true});
     // $scope.showForms()
-    $state.go('forms.login', {}, {reload: true})
+    $state.go('forms', {}, {reload: true})
 
   }
 
