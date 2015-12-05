@@ -241,85 +241,60 @@ angular.module('starter.controllers', [])
   }
 })
 
-
-.controller('ChangeCtrl', function($scope, $http, $rootScope) {
-
-})
-
-.controller('MessageCtrl', function($scope, $http, $rootScope,$cordovaCamera,$cordovaCapture, $cordovaImagePicker,$resource,$cordovaInAppBrowser) {
-  $scope.openInExternalBrowser = function(){
-    // Open in external browser
-    window.open('http://162.243.143.15','_system','location=yes');
-  }
-  $scope.openInAppBrowser = function(){
-    // Open in app browser
-    // window.open('http://162.243.143.15','_blank');
-    var options = {location: 'yes', clearcache: 'yes',toolbar: 'yes'}
-    $cordovaInAppBrowser.open('http://162.243.143.15', '_blank', options)
-    .then(function(event) {
-        // success
-    }).catch(function(event) {})
-    // $cordovaInAppBrowser.close()
-  }
-
-  $scope.openCordovaWebView = function(){
-    // Open cordova webview if the url is in the whitelist otherwise opens in app browser
-    window.open('http://162.243.143.15','_self');
-  }
-  $scope.choosePicture = function() {
-    var options = {
-      quality : 75,
-      destinationType : Camera.DestinationType.DATA_URL,
-      //  sourceType : Camera.PictureSourceType.CAMERA,
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      allowEdit : true,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
-      popoverOptions: CameraPopoverOptions,
-      saveToPhotoAlbum: false
-    }
-
-    $cordovaCamera.getPicture(options).then(function(imageData) {
-      $scope.imgURI = "data:image/jpeg;base64," + imageData;
-    }, function(err) {
-      // An error occured. Show a message to the user
-    })
-  }
-  // var Token = $resource('http://localhost:3000/uptoken')
-  var Po = $resource('http://localhost:3000/sina/test')
-  $resource('http://localhost:3000/uptoken').get().$promise.then(function(data) {
-    console.log(data.uptoken)
-    console.log(JSON.stringify(data))
-  })
-})
-
 .controller('AccountCtrl', function($scope,$http,$cordovaCamera,$cordovaCapture) {
   $scope.settings = {
     enableFriends: true
   }
-  $scope.takePicture = function() {
-    var options = {
-      quality : 75,
-      destinationType : Camera.DestinationType.DATA_URL,
-      sourceType : Camera.PictureSourceType.CAMERA,
-      //  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      allowEdit : true,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
-      popoverOptions: CameraPopoverOptions,
-      saveToPhotoAlbum: false
-    }
-
-    $cordovaCamera.getPicture(options).then(function(imageData) {
-      $scope.imgURI = "data:image/jpeg;base64," + imageData;
-    }, function(err) {
-      // An error occured. Show a message to the user
-    })
-  }
 
 })
+
+// .controller('MessageCtrl', function($scope, $http, $rootScope,$cordovaCamera,$cordovaCapture, $cordovaImagePicker,$resource,$cordovaInAppBrowser) {
+//   $scope.openInExternalBrowser = function(){
+//     // Open in external browser
+//     window.open('http://162.243.143.15','_system','location=yes');
+//   }
+//   $scope.openInAppBrowser = function(){
+//     // Open in app browser
+//     // window.open('http://162.243.143.15','_blank');
+//     var options = {location: 'yes', clearcache: 'yes',toolbar: 'yes'}
+//     $cordovaInAppBrowser.open('http://162.243.143.15', '_blank', options)
+//     .then(function(event) {
+//         // success
+//     }).catch(function(event) {})
+//     // $cordovaInAppBrowser.close()
+//   }
+//
+//   $scope.openCordovaWebView = function(){
+//     // Open cordova webview if the url is in the whitelist otherwise opens in app browser
+//     window.open('http://162.243.143.15','_self');
+//   }
+//   $scope.choosePicture = function() {
+//     var options = {
+//       quality : 75,
+//       destinationType : Camera.DestinationType.DATA_URL,
+//       //  sourceType : Camera.PictureSourceType.CAMERA,
+//       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+//       allowEdit : true,
+//       encodingType: Camera.EncodingType.JPEG,
+//       targetWidth: 300,
+//       targetHeight: 300,
+//       popoverOptions: CameraPopoverOptions,
+//       saveToPhotoAlbum: false
+//     }
+//
+//     $cordovaCamera.getPicture(options).then(function(imageData) {
+//       $scope.imgURI = "data:image/jpeg;base64," + imageData;
+//     }, function(err) {
+//       // An error occured. Show a message to the user
+//     })
+//   }
+//   // var Token = $resource('http://localhost:3000/uptoken')
+//   var Po = $resource('http://localhost:3000/sina/test')
+//   $resource('http://localhost:3000/uptoken').get().$promise.then(function(data) {
+//     console.log(data.uptoken)
+//     console.log(JSON.stringify(data))
+//   })
+// })
 
 // $scope.capture = function() {
 //   // var options = { limit: 3 };

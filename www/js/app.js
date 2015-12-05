@@ -130,74 +130,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       }
     }
   })
-  .state('tab.change', {
-    url: '/change',
-    // cache: false,
-    views: {
-      'tab-change': {
-        templateUrl: 'templates/tab-change.html',
-        abstract: true,
-        controller: 'ChangeCtrl'
-      }
-    }
-  })
-  .state('tab.change.page1', {
-    url: '/page1',
-    // cache: false,
-    views: {
-      'change-page1': {
-        templateUrl: 'templates/change-page1.html'
-        // controller: 'ChangeCtrl'
-      }
-    }
-  })
-  .state('tab.change.page2', {
-    url: '/page2',
-    // cache: false,
-    views: {
-      'change-page2': {
-        templateUrl: 'templates/change-page2.html'
-        // controller: 'ChangeCtrl'
-      }
-    }
-  })
-  .state('tab.message', {
-    url: '/message',
-    // cache: false,
-    abstract: true,
-    views: {
-      'tab-message': {
-        templateUrl: 'templates/tab-message.html',
-        // abstract: true,
-        controller: 'MessageCtrl'
-      }
-      // ,
-      // 'message-mes@tab.message': {
-      //   templateUrl: 'templates/mes1.html'
-      //   // controller: 'MessageCtrl'
-      // }
-    }
-  })
-  .state('tab.message.mes1', {
-    url: '/mes1',
-    // cache: false,
-    views: {
-      'message-mes@tab.message': {
-        templateUrl: 'templates/mes1.html'
-        // controller: 'MessageCtrl'
-      }
-    }
-  })
-  .state('tab.message.mes2', {
-    url: '/mes2',
-    // cache: false,
-    views: {
-      'message-mes@tab.message': {
-        templateUrl: 'templates/mes2.html'
-        // controller: 'MessageCtrl'
-      }
-    }
-  })
+
   .state('tab.account', {
     url: '/account',
     views: {
@@ -212,6 +145,33 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
   $urlRouterProvider.otherwise('/tab/home');
 
 });
+
+// .state('tab.message', {
+//   url: '/message',
+//   abstract: true,
+//   views: {
+//     'tab-message': {
+//       templateUrl: 'templates/tab-message.html',
+//       controller: 'MessageCtrl'
+//     }
+//   }
+// })
+// .state('tab.message.mes1', {
+//   url: '/mes1',
+//   views: {
+//     'message-mes@tab.message': {
+//       templateUrl: 'templates/mes1.html'
+//     }
+//   }
+// })
+// .state('tab.message.mes2', {
+//   url: '/mes2',
+//   views: {
+//     'message-mes@tab.message': {
+//       templateUrl: 'templates/mes2.html'
+//     }
+//   }
+// })
 
 // .state('forms', {
 //   url: "/forms",

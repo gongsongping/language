@@ -1,35 +1,14 @@
 <ion-view view-title="Account">
-  <ion-nav-buttons side="primary">
+  <!-- <ion-nav-buttons side="primary">
       <button class="button" ng-click="doSomething()">
         I'm a button on the primary of the navbar!
       </button>
-  </ion-nav-buttons>
+  </ion-nav-buttons> -->
   <ion-content>
     <ion-list>
     <ion-toggle  ng-model="settings.enableFriends">
         Enable Friends
     </ion-toggle>
     </ion-list>
-    <!-- <button class="button" ng-click="capture()">capture</button> -->
-    <button class="button" ng-click="takePicture()">Take Picture</button>
-    <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-    <img ng-show="imgURI === undefined" ng-src="http://placehold.it/300x300">
-    <!-- <ion-slide-box on-slide-changed="slideHasChanged($index)">
-      <ion-slide>
-        <div class="box blue"><h1>BLUE</h1></div>
-      </ion-slide>
-      <ion-slide>
-        <div class="box yellow"><h1>YELLOW</h1></div>
-      </ion-slide>
-      <ion-slide>
-        <div class="box pink"><h1>PINK</h1></div>
-      </ion-slide>
-    </ion-slide-box> -->
-    <!-- <nav mfb-menu position="tr" effect="zoomin" label="hover here"
-         active-icon="ion-edit" resting-icon="ion-plus-round"
-         toggling-method="click">
-      <button mfb-button icon="paper-airplane" label="menu item"></button>
-    </nav> -->
-
 </ion-content>
 </ion-view>
