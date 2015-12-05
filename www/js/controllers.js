@@ -115,16 +115,43 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('WriteCtrl', function($scope, $http, Qiniu, $state, $rootScope, Post) {
-  // Qiniu.qiniu()
+.controller('WriteCtrl', function($scope, $http, Qiniu, $state, $rootScope, $resource, Post) {
+  var hiddenPo = $resource($rootScope.baseUrl + '/api/hiddenposts/:id')
+  $scope.posts = []
+  $scope.page = 0
+  $scope.lastId = 0
+  $scope.limit = 5
+  $scope.dataLength = $scope.limit
+  $scope.loadMore = function() {
+    if ($scope.dataLength == $scope.limit){
+      // $scope.page += 1
+      hiddenPo.query({page: $scope.page, lastId: $scope.lastId})
+      .$promise.then(function(data) {
+        console.log(JSON.stringify(data))
+        $scope.dataLength = data.length
+        $scope.posts = $scope.posts.concat(data)
+        //Stop the ion-refresher from spinning
+        $scope.page += 1
+        if (data.length == $scope.limit) {$scope.lastId = data[$scope.limit-1].id}
+        $scope.$broadcast('scroll.infiniteScrollComplete')
+      })
+      // $scope.$broadcast('scroll.infiniteScrollComplete')
+    }
+  }
+
   $scope.post = {}
   $scope.sendPost = function() {
     var post = new Post($scope.post)
     post.$save(function(data) {
       // $rootScope.$broadcast('writeUpdated')
-      $state.go('tab.home', null, {reload: true})
+      if ($scope.post.hidden){
+        $state.go($state.current, null, {reload: true})
+      } else {
+       $state.go('tab.home', null, {reload: true})
+      }
     })
   }
+
 })
 
 .controller('UserIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, $window, Post, Comment, User, Follow) {

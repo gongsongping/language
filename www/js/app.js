@@ -9,9 +9,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state) {
 
-//  $rootScope.baseUrl = "http://localhost:3000"
+ $rootScope.baseUrl = "http://localhost:3000"
   //  $rootScope.baseUrl = "http://162.243.143.15"
-   $rootScope.baseUrl = "http://changiif.com"
+  //  $rootScope.baseUrl = "http://changiif.com"
 
   console.log($window.localStorage.token)
   if ($window.localStorage.token) {
