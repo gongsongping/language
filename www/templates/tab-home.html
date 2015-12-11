@@ -6,22 +6,19 @@
   </ion-refresher>
   <div class="list card" ng-repeat="p in posts">
     <a href="#/tab/home/users/{{p.user.id}}">
-      <!-- <a ui-sref=".user-id({id: p.user.id})"> -->
       <div class="item item-avatar">
         <img src="mcfly.jpg">
         <h2>{{p.user.name}} </h2>
-        <div class=""> the {{$index}} users </div>
+        <!-- <div class=""> the {{$index}} users </div> -->
       </div>
     </a>
     <div class="item item-body">
-      <!-- <img class="full-image" src="delorean.jpg"> -->
       <a href="#/tab/home/posts/{{p.id}}">
-        <!-- <a ui-sref=".post-id({id: p.id})"> -->
         <p class="{{p.hidden}}">{{p.content}}</p>
       </a>
       <p>
-        <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">5 Comments</a>
+        <!-- <a href="#" class="subdued">1 Like</a> -->
+        <a href="#" class="subdued">{{p.comments_c}} comments</a>
       </p>
     </div>
     <div class="item tabs tabs-secondary tabs-icon-left">
