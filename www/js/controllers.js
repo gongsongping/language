@@ -54,10 +54,11 @@ angular.module('starter.controllers', [])
         // $scope.showForms()
       }
     })
-
   }
 
+
   $scope.doSignup = function() {
+    $scope.signupData.avatar = document.getElementById("avatar").src
     var user = new User($scope.signupData)
     user.$save(function(data) {
       console.log(data.token)
@@ -144,7 +145,7 @@ angular.module('starter.controllers', [])
       if ($scope.post.hidden){
         $state.go($state.current, null, {reload: true})
       } else {
-       $state.go('tab.home', null, {reload: true})
+        $state.go('tab.home', null, {reload: true})
       }
     })
   }

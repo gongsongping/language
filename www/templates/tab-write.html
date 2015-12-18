@@ -17,7 +17,8 @@
 
   <ion-list>
     <ion-item ng-repeat="p in posts">
-      {{p.content}}
+      <!-- {{p.content}} -->
+      <div ng-bind-html="p.content"></div>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll>

@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js ,'ngIOS9UIWebViewPatch'
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ngCordova']) //'firebase',
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ngCordova','ngFileUpload']) //'firebase',
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state) {
 
@@ -107,7 +107,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     .state('tab.home-user-id', {
       url: '/home/users/:id',
-      // cache: false,
+      cache: false,
       views: {
         'tab-home': {
           templateUrl: 'templates/home-user-id.html',
@@ -118,7 +118,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     .state('tab.home-post-id', {
       url: '/home/posts/:id',
-      // cache: false,
+      cache: false,
       views: {
         'tab-home': {
           templateUrl: 'templates/home-post-id.html',

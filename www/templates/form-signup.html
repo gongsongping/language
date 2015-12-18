@@ -20,10 +20,18 @@
           <input type="password" ng-model="signupData.password_confirmation" >
         </label>
         <label class="item">
+          <button ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+          accept="image/*"  ngf-resize="{width: 50, height: 50, quality: 0.8}" class="button button-assertive button-small" >
+          click to set avatar
+          </button>
+          <img id="avatar" ngf-src="file" ngf-resize="{width: 50, height: 50, quality: 0.8}" />
+        </label>
+        <label class="item">
           <button class="button button-block button-positive" type="submit">sign up</button>
         </label>
       </div>
       <!-- <div>{{signUpData}}</div> -->
     </form>
+    <!-- <img id="avatar" ngf-no-object-url="true" ngf-src="file" ngf-resize="{width: 40, height: 40, quality: 0.9}" /> -->
 </ion-content>
 </ion-view>
