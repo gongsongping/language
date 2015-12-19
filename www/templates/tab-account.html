@@ -1,14 +1,19 @@
 <ion-view view-title="Account">
   <!-- <ion-nav-buttons side="primary">
-      <button class="button" ng-click="doSomething()">
-        I'm a button on the primary of the navbar!
-      </button>
-  </ion-nav-buttons> -->
-  <ion-content>
-    <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
+  <button class="button" ng-click="doSomething()">
+  I'm a button on the primary of the navbar!
+</button>
+</ion-nav-buttons> -->
+<ion-content>
+  <div class="list">
+    <a class="item" href="#">
+      edit profile
+    </a>
+    <div class="item item-divider">
+    </div>
+    <a class="item button button-full button-assertive" ng-click=logout()>
+        sign out
+    </a>
+  </div>
 </ion-content>
 </ion-view>

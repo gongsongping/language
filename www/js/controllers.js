@@ -7,7 +7,6 @@ angular.module('starter.controllers', [])
   }
   $scope.currentUser = Boolean($window.localStorage.token)
   // Form data for the login modal
-
   $scope.logout = function() {
     $window.localStorage.token = ''
     $scope.currentUser = Boolean($window.localStorage.token)
@@ -21,9 +20,7 @@ angular.module('starter.controllers', [])
     // $state.go('tab.account', {}, {reload: true});
     // $scope.showForms()
     $state.go('forms', {}, {reload: true})
-
   }
-
 })
 
 .controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User) {
