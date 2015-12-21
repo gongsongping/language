@@ -1,16 +1,13 @@
 <ion-view view-title="{{user.name}}">
   <ion-content class="padding">
-
     <div class="row">
-      <div class="col">
-        <!-- <img src="{{user.avatar}}"> -->
-        <!-- <h4>{{user.name}}</h4> -->
+      <div class="col col-40">
         <div class="item item-avatar">
-           <img src="{{user.avatar}}">
+           <img src="{{user.avatar}}" >
            <h2>{{user.name}}</h2>
         </div>
       </div>
-      <div class="col col-75">
+      <div class="col col-60">
         <div ng-hide="isCurrentUser">
           <div ng-show="foing">
             <button  class="button button-block  button-assertive button-outline"  ng-click="unfollow()">  unfollow  </button>

@@ -22,3 +22,9 @@
 a {
   text-decoration:none;
 }
+/*.bar, .bar-header, .bar-footer {
+   height: 100px;
+}*/
+/*.bar-footer{
+  height:100px;
+}*/
