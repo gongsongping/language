@@ -24,7 +24,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User) {
-  $scope.loginData = {email: "gsp@gmail.com", password: "191954"}
+  $scope.loginData = {email: "gsp20@gmail.com", password: "191954"}
   $scope.signupData = {name:'gsp'}
 
   // $scope.loginForm = true

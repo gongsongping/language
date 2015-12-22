@@ -15,13 +15,12 @@
     </form>
   </div>
 
-  <ion-list>
-    <ion-item ng-repeat="p in posts">
-      <!-- {{p.content}} -->
-      <div ng-bind-html="p.content"></div>
+  <div class="list card" ng-repeat="p in posts">
+    <div class="item item-body">
+      <p style="font-size:15px;" ng-bind-html="p.content"></p>
       <p ng-bind="p.created_at | date:'yyyy-MM-dd'"></p>
-    </ion-item>
-  </ion-list>
+    </div>
+  </div>
   <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll>
 </ion-content>
 </ion-view>
