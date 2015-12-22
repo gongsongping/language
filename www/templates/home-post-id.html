@@ -11,17 +11,15 @@ The Friends service returns an array of friend data
         <div class="item item-avatar">
           <img src="{{post.user.avatar}}">
           <h2>{{post.user.name}}</h2>
+          <p ng-bind="post.created_at | date:'yyyy-MM-dd'"></p>
         </div>
       </a>
-      <div class="item item-body">
-        <!-- <p class="{{post.hidden}}">{{post.content}}</p> -->
-        <div ng-bind-html="post.content"></div>
-        <!-- <p>
-        <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">{{p.comments_c}} comments</a>
-      </p> -->
+      <!-- <div class="item item-body"> -->
+        <div style="margin-left:20px;" ng-bind-html="post.content"></div>
+        <!-- <a href="#" class="subdued">1 Like</a> -->
+        <!-- <a href="#" class="subdued">{{p.comments_c}} comments</a> -->
+      <!-- </div> -->
     </div>
-  </div>
 
   <div style="margin-top:10px;">
     <form ng-submit="sendComment()">
@@ -35,11 +33,14 @@ The Friends service returns an array of friend data
     </form>
   </div>
   <div class="list card" ng-repeat="c in comments">
-    <a class="item item-avatar" href="#/tab/home/users/{{c.user.id}}">
+    <a href="#/tab/home/users/{{c.user.id}}">
+      <div class="item item-avatar">
         <img src="{{c.user.avatar}}">
-        <h2>{{c.user.name}}</h2><br>
-        <p>{{c.content}}</p>
+        <h2>{{c.user.name}}</h2>
+        <p ng-bind="c.created_at | date:'yyyy-MM-dd'"></p>
+      </div>
     </a>
+    <p style="margin-left:75px;">{{c.content}}</p>
   </div>
 <!-- <button class="button button-assertive" ng-click="loadMore()">load</button> -->
 <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll>
