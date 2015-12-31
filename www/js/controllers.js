@@ -14,76 +14,57 @@ angular.module('starter.controllers', [])
     console.log($window.localStorage.token)
     $rootScope.loginErr = ''
     $rootScope.signupErr = ''
-    // window.location.reload()
-    // $window.location.reload(true);
-    // $state.go($state.current, {}, {reload: true});
-    // $state.go('tab.account', {}, {reload: true});
-    // $scope.showForms()
     $state.go('forms', {}, {reload: true})
   }
 })
 
-.controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User) {
-  $scope.loginData = {email: "gsp20@gmail.com", password: "191954"}
+.controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User, Qiniu) {
+  $scope.loginData = {email: "gsp@gmail.com", password: "191954"}
   $scope.signupData = {name:'gsp'}
-
-  // $scope.loginForm = true
-  // $scope.signupForm = false
   $rootScope.loginErr = ''
   $rootScope.signupErr = ''
-
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     var sess = new Session($scope.loginData)
     sess.$save(function(data) {
-      console.log(data.token)
-      // console.log(err);
       if (data.token) {
         $window.localStorage.token = data.token
         $scope.currentUser = Boolean($window.localStorage.token)
         $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
         console.log($window.localStorage.token)
-        // $scope.closeForms()
         $state.go('tab.home', {}, {reload: true})
       } else {
         console.log(data.err)
         $rootScope.loginErr = data.err
-        // $scope.showForms()
       }
     })
   }
-
-
+  $scope.getFile = function(f) {
+    $scope.temfile = f
+  }
   $scope.doSignup = function() {
-    $scope.signupData.avatar = document.getElementById("avatar").src
-    var user = new User($scope.signupData)
-    user.$save(function(data) {
-      console.log(data.token)
-      // console.log(err);
-      if (data.token) {
-        $window.localStorage.token = data.token
-        $scope.currentUser = Boolean($window.localStorage.token)
-        $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
-        console.log($window.localStorage.token)
-        // $scope.closeForms()
-        $state.go('tab.home', {}, {reload: true})
-      } else {
-        // $scope.modal.show()
-        console.log(data.err)
-        $rootScope.signupErr = data.err
-        // $scope.showForms()
-      }
+    Qiniu.ngFileUp($scope.temfile).then(function (resp) {
+      // console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data.key + JSON.stringify(resp.data))
+      $scope.signupData.avatar = "http://7xj5ck.com1.z0.glb.clouddn.com/" + resp.data.key
+      var user = new User($scope.signupData)
+      user.$save(function(data) {
+        if (data.token) {
+          $window.localStorage.token = data.token
+          $scope.currentUser = Boolean($window.localStorage.token)
+          $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
+          console.log($window.localStorage.token)
+          $state.go('tab.home', {}, {reload: true})
+        } else {
+          console.log(data.err)
+          $rootScope.signupErr = data.err
+        }
+      })
     })
   }
-
 })
 
 .controller('HomeCtrl', function($scope, $http, $state, $rootScope, $window, Post) {
-  $scope.posts = []
-  $scope.page = 0
-  $scope.lastId = 0
-  $scope.limit = 5
-  $scope.dataLength = $scope.limit
+  $scope.posts = []; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
     if ($scope.dataLength == $scope.limit){
       // $scope.page += 1
@@ -110,16 +91,11 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('WriteCtrl', function($scope, $http, Qiniu, $state, $rootScope, $resource, Post) {
+.controller('WriteCtrl', function($scope, $http, Qiniu, $state,$ionicHistory, $rootScope, $resource, Post) {
   var hiddenPo = $resource($rootScope.baseUrl + '/api/hiddenposts/:id')
-  $scope.posts = []
-  $scope.page = 0
-  $scope.lastId = 0
-  $scope.limit = 5
-  $scope.dataLength = $scope.limit
+  $scope.posts = []; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
     if ($scope.dataLength == $scope.limit){
-      // $scope.page += 1
       hiddenPo.query({page: $scope.page, lastId: $scope.lastId})
       .$promise.then(function(data) {
         console.log(JSON.stringify(data))
@@ -140,9 +116,9 @@ angular.module('starter.controllers', [])
     post.$save(function(data) {
       // $rootScope.$broadcast('writeUpdated')
       if ($scope.post.hidden){
-        $state.go($state.current, null, {reload: true})
+          $state.go($state.current, null, {reload: true})
       } else {
-        $state.go('tab.home', null, {reload: true})
+          $state.go('tab.home', null,{ reload: true})
       }
     })
   }
@@ -151,15 +127,9 @@ angular.module('starter.controllers', [])
 
 .controller('UserIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, $window, Post, Comment, User, Follow) {
   // $scope.user = User.get({id: $stateParams.uId})
-  $scope.posts = []
-  $scope.isCurrentUser = true
-  $scope.page = 0
-  $scope.lastId = 0
-  $scope.limit = 5
-  $scope.dataLength = $scope.limit
+  $scope.posts = []; $scope.isCurrentUser = true; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
     if ($scope.dataLength == $scope.limit) {
-      // $scope.page++
       User.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
       .$promise.then(function(data) {
         console.log(JSON.stringify(data))
@@ -200,17 +170,11 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('PostIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, $window, Post, Comment) {
-  // $rootScope.moreData = true
+.controller('PostIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, $window, $ionicHistory, Post, Comment) {
   $scope.comment = {"postId": $stateParams.id, "content":""}
-  $scope.comments = []
-  $scope.page = 0
-  $scope.lastId = 0
-  $scope.limit = 5
-  $scope.dataLength = $scope.limit
+  $scope.comments = []; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
     if ($scope.dataLength == $scope.limit) {
-      // $scope.page++
       Post.get({id: $stateParams.id, page: $scope.page, lastId: $scope.lastId})
       .$promise.then(function(data) {
         console.log(JSON.stringify(data))
@@ -225,13 +189,13 @@ angular.module('starter.controllers', [])
     }
   }
   // $scope.loadMore()
-
   $scope.sendComment = function() {
     var comment = new Comment($scope.comment)
     comment.$save(function(data) {
       console.log(JSON.stringify(data))
-      $state.go($state.current, {}, {reload: true})
-      // $window.location.reload(true)
+      $ionicHistory.clearCache().then(function(){
+        $state.go($state.current, null, {reload: true})
+      })
     })
   }
 })

@@ -7,12 +7,15 @@
 // 'starter.controllers' is found in controllers.js ,'ngIOS9UIWebViewPatch'
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ngCordova','ngFileUpload']) //'firebase',
 
-.run(function($ionicPlatform, $http, $window, $rootScope, $state) {
+.run(function($ionicPlatform, $http, $window, $rootScope, $state, $resource) {
 
  // $rootScope.baseUrl = "http://localhost:3000"
   //  $rootScope.baseUrl = "http://162.243.143.15"
    $rootScope.baseUrl = "http://changiif.com"
-
+   $resource('http://changiif.com/uptoken').get().$promise.then(function(data) {
+     $window.localStorage.qiniuToken = data.uptoken
+     console.log('qiniuT  ' + $window.localStorage.qiniuToken)
+   })
   console.log($window.localStorage.token)
   if ($window.localStorage.token) {
     $http.defaults.headers.common["Authorization"] = "Token token=" + $window.localStorage.token
@@ -107,7 +110,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
 
     .state('tab.home-user-id', {
       url: '/home/users/:id',
-      cache: false,
+      // cache: false,
       views: {
         'tab-home': {
           templateUrl: 'templates/home-user-id.html',
