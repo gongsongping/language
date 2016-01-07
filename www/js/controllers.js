@@ -114,7 +114,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('WriteCtrl', function($scope, $http, Qiniu, $state,$ionicHistory, $rootScope, $resource, Post) {
+.controller('WriteCtrl', function($scope, $http, Qiniu, $state,$ionicHistory, $rootScope, $resource, Post, Qiniu) {
   var hiddenPo = $resource($rootScope.baseUrl + '/api/hiddenposts/:id')
   $scope.posts = []; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
@@ -133,17 +133,39 @@ angular.module('starter.controllers', [])
     }
   }
 
-  $scope.post = {}
+  $scope.post = {content:''}; $scope.temfiles = []
+  $scope.listFiles = function(f) {
+    $scope.temfiles.push(f) // console.log($scope.cafe.content)
+  }
+  $scope.refresh = function() {
+    $state.go($state.current, {}, {reload: true})
+  }
+
   $scope.sendPost = function() {
-    var post = new Post($scope.post)
-    post.$save(function(data) {
-      // $rootScope.$broadcast('writeUpdated')
-      if ($scope.post.hidden){
-          $state.go($state.current, null, {reload: true})
-      } else {
-          $state.go('tab.home', null,{ reload: true})
-      }
-    })
+    if ($scope.temfiles[0]) {
+      Qiniu.ngFileUp($scope.temfiles[0]).then(function (resp) {
+        // console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data.key + JSON.stringify(resp.data))   // http://7xj5ck.com1.z0.glb.clouddn.com/2015-11-28T06%3A11%3A25.113Z
+        $scope.post.key = resp.data.key
+        var post = new Post($scope.post) //{key: resp.data.key, content: $scope.content})
+        post.$save(function(data) {
+          $state.go('tab.home', {}, {reload: true})
+        })
+      }, function (resp) {
+        console.log('Error status: ' + resp.status)
+      }, function (evt) {
+        $scope.uppercent = parseInt(100.0 * evt.loaded / evt.total)
+        // console.log('progress: ' + $scope.uppercent + '% ' + evt.config.data.file.name)
+      })
+    } else {
+      var post = new Post($scope.post)
+      post.$save(function(data) {
+        if ($scope.post.hidden){
+            $state.go($state.current, null, {reload: true})
+        } else {
+            $state.go('tab.home', null,{ reload: true})
+        }
+      })
+    }
   }
 
 })
