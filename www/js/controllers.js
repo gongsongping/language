@@ -18,7 +18,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User, Qiniu, $ionicModal, $timeout, Countries) {
+.controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User, Qiniu, $ionicModal, $timeout, $resource ,Countries) {
   $scope.loginData = {email: "lg1@gmail.com", password: "191954"}
   $scope.signupData = {name:'lg1'}
   $rootScope.loginErr = ''
@@ -83,6 +83,17 @@ angular.module('starter.controllers', [])
           $rootScope.signupErr = data.err
         }
       })
+    })
+  }
+  var Discover = $resource($rootScope.baseUrl + '/api/discoverposts/:id')
+  $scope.posts = []; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
+  $scope.loadMore = function() {
+    Discover.query({page: $scope.page, lastId: $scope.lastId})
+    .$promise.then(function(data) {
+      console.log(JSON.stringify(data))
+      $scope.posts = $scope.posts.concat(data)
+      $scope.page += 1
+      $scope.$broadcast('scroll.infiniteScrollComplete')
     })
   }
 })
@@ -243,6 +254,21 @@ angular.module('starter.controllers', [])
       })
     })
   }
+})
+
+.controller('DiscoverCtrl', function($scope, $http, $rootScope, $state, $window, $resource, Post) {
+  var Discover = $resource($rootScope.baseUrl + '/api/discoverposts/:id')
+  $scope.posts = []; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
+  $scope.loadMore = function() {
+    Discover.query({page: $scope.page, lastId: $scope.lastId})
+    .$promise.then(function(data) {
+      console.log(JSON.stringify(data))
+      $scope.posts = $scope.posts.concat(data)
+      $scope.page += 1
+      $scope.$broadcast('scroll.infiniteScrollComplete')
+    })
+  }
+
 })
 
 .controller('AccountCtrl', function($scope,$http,$cordovaCamera,$cordovaCapture) {

@@ -140,6 +140,38 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       }
     }
   })
+  .state('tab.discover', {
+    url: '/discover',
+    // cache: false,
+    views: {
+      'tab-discover': {
+        templateUrl: 'templates/tab-discover.html',
+        controller: 'DiscoverCtrl'
+      }
+    }
+  })
+
+  .state('tab.discover-user-id', {
+    url: '/discover/users/:id',
+    // cache: false,
+    views: {
+      'tab-discover': {
+        templateUrl: 'templates/discover-user-id.html',
+        controller: 'UserIdCtrl'
+      }
+    }
+  })
+
+  .state('tab.discover-post-id', {
+    url: '/discover/posts/:id',
+    cache: false,
+    views: {
+      'tab-discover': {
+        templateUrl: 'templates/discover-post-id.html',
+        controller: 'PostIdCtrl'
+      }
+    }
+  })
 
   .state('tab.account', {
     url: '/account',

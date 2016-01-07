@@ -1,0 +1,45 @@
+<ion-view view-title="Discover">
+  <ion-content>
+    <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+  <div style="margin-left:auto; margin-right:auto; margin-top:10px; max-width: 700px;">
+    <div class="list card" ng-repeat="p in posts">
+      <a href="#/tab/discover/users/{{p.user.id}}">
+        <div class="item item-avatar">
+          <img src="{{p.user.avatar}}">
+          <h2>{{p.user.name}} </h2>
+          <p ng-bind="p.created_at | date:'yyyy-MM-dd'"></p>
+        </div>
+      </a>
+      <div class="item item-body">
+        <a href="#/tab/discover/posts/{{p.id}}">
+          <img ng-f="p.url" ng-src="{{p.url}}" class="full-image" >
+          <p style="font-size:100%;" ng-bind-html="p.content"></p>
+        </a>
+        <p>
+          <!-- <a href="#" class="subdued">1 Like</a> -->
+          <a href="#" class="subdued">{{p.comments_c}} comments</a>
+        </p>
+      </div>
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item" href="#">
+          <i class="icon ion-thumbsup"></i>
+          Like
+        </a>
+        <a class="tab-item" href="#">
+          <i class="icon ion-chatbox"></i>
+          Comment
+        </a>
+        <a class="tab-item" href="#">
+          <i class="icon ion-share"></i>
+          Share
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll>
+</ion-content>
+</ion-view>

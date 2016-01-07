@@ -1,0 +1,53 @@
+<ion-view view-title="{{user.name}}">
+  <ion-content class="padding">
+    <div style="margin-left:auto; margin-right:auto; margin-top:10px; max-width: 700px;">
+      <div class="row">
+        <div class="col col-40">
+          <div class="item item-avatar">
+             <img src="{{user.avatar}}" >
+             <h2>{{user.name}}</h2>
+          </div>
+        </div>
+        <div class="col col-60">
+          <div ng-hide="isCurrentUser">
+            <div ng-show="foing">
+              <button  class="button button-block  button-assertive button-outline"  ng-click="unfollow()">  unfollow  </button>
+            </div>
+            <div ng-show="!foing">
+              <button  class="button button-block  button-assertive button-outline"  ng-click="follow()"> follow  </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="list card" ng-repeat="p in posts">
+       <a href="#/tab/discover/posts/{{p.id}}">
+         <div class="item item-body">
+           <p ng-bind="p.created_at | date:'yyyy-MM-dd'"></p>
+           <img ng-f="p.url" ng-src="{{p.url}}" class="full-image" >
+           <p style="font-size:100%;" ng-bind-html="p.content"></p>
+           <p>
+             <!-- <a href="#" class="subdued">1 Like</a> -->
+             <a href="#" class="subdued">{{p.comments_c}} comments</a>
+           </p>
+         </div>
+       </a>
+       <div class="item tabs tabs-secondary tabs-icon-left">
+         <a class="tab-item" href="#">
+           <i class="icon ion-thumbsup"></i>
+           Like
+         </a>
+         <a class="tab-item" href="#">
+           <i class="icon ion-chatbox"></i>
+           Comment
+         </a>
+         <a class="tab-item" href="#">
+           <i class="icon ion-share"></i>
+           Share
+         </a>
+       </div>
+     </div>
+   </div>
+   <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>
