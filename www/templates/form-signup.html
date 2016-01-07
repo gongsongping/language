@@ -11,6 +11,12 @@
           <span class="input-label">Email</span>
           <input type="text" ng-model="signupData.email" >
         </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            nationality
+          </div>
+          <button ng-click="modal.show()" class="button button-clear ">{{signupData.nationality}}</button>
+        </label>
         <label class="item item-input">
           <span class="input-label">Password</span>
           <input type="password" ng-model="signupData.password" >

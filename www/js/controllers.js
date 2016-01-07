@@ -18,9 +18,9 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User, Qiniu) {
-  $scope.loginData = {email: "gsp@gmail.com", password: "191954"}
-  $scope.signupData = {name:'gsp'}
+.controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User, Qiniu, $ionicModal, $timeout, Countries) {
+  $scope.loginData = {email: "lg1@gmail.com", password: "191954"}
+  $scope.signupData = {name:'lg1'}
   $rootScope.loginErr = ''
   $rootScope.signupErr = ''
   // Perform the login action when the user submits the login form
@@ -38,6 +38,30 @@ angular.module('starter.controllers', [])
         $rootScope.loginErr = data.err
       }
     })
+  }
+  $scope.countries = Countries.all()
+  $ionicModal.fromTemplateUrl('templates/countries.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal   // modal.show()
+  })
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove()
+  })
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  })
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  })
+  $scope.signupData.nationality = "select country"
+  $scope.setCtry = function(index) {
+    $scope.signupData.nationality = $scope.countries[index].name
+    $scope.modal.hide()
   }
   $scope.getFile = function(f) {
     $scope.temfile = f
@@ -67,7 +91,6 @@ angular.module('starter.controllers', [])
   $scope.posts = []; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
     if ($scope.dataLength == $scope.limit){
-      // $scope.page += 1
       Post.query({page: $scope.page, lastId: $scope.lastId})
       .$promise.then(function(data) {
         console.log(JSON.stringify(data))

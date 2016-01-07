@@ -1,0 +1,9 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-calm">
+    <h1 class="title">select your country</h1>
+    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+ </ion-header-bar>
+  <ion-content>
+    <a class="button button-clear button-small button-outline " ng-repeat="c in countries" ng-click="setCtry($index)"> {{c.name}}</a>
+  </ion-content>
+</ion-modal-view>
