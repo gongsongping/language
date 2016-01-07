@@ -143,7 +143,7 @@ angular.module('starter.controllers', [])
       // $scope.$broadcast('scroll.infiniteScrollComplete')
     }
   }
-
+  $scope.loadMore()
   $scope.post = {content:''}; $scope.temfiles = []
   $scope.listFiles = function(f) {
     $scope.temfiles.push(f) // console.log($scope.cafe.content)
@@ -244,6 +244,7 @@ angular.module('starter.controllers', [])
       })
     }
   }
+  $scope.loadMore()
   // $scope.loadMore()
   $scope.sendComment = function() {
     var comment = new Comment($scope.comment)

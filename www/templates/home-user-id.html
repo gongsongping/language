@@ -27,25 +27,10 @@
            <img ng-f="p.url" ng-src="{{p.url}}" class="full-image" >
            <p style="font-size:100%;" ng-bind-html="p.content"></p>
            <p>
-             <!-- <a href="#" class="subdued">1 Like</a> -->
              <a href="#" class="subdued">{{p.comments_c}} comments</a>
            </p>
          </div>
        </a>
-       <div class="item tabs tabs-secondary tabs-icon-left">
-         <a class="tab-item" href="#">
-           <i class="icon ion-thumbsup"></i>
-           Like
-         </a>
-         <a class="tab-item" href="#">
-           <i class="icon ion-chatbox"></i>
-           Comment
-         </a>
-         <a class="tab-item" href="#">
-           <i class="icon ion-share"></i>
-           Share
-         </a>
-       </div>
      </div>
    </div>
    <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll>

@@ -12,8 +12,6 @@
         <div class="item item-body">
           <img ng-f="post.url" ng-src="{{post.url}}" class="full-image" >
           <p style="margin-left:10px; font-size:100%;" ng-bind-html="post.content"></p>
-          <!-- <a href="#" class="subdued">1 Like</a> -->
-          <!-- <a href="#" class="subdued">{{p.comments_c}} comments</a> -->
         </div>
       </div>
 
@@ -22,10 +20,7 @@
         <label class="item item-input">
           <textarea ng-model="comment.content" cols="3" rows="3"></textarea>
         </label>
-        <!-- <label class="item "> -->
         <input type="submit" value="comment" class="button button-small button-block button-calm">
-        <!-- </label> -->
-        <!-- <div> {{comment}}</div> -->
       </form>
     </div>
     <div class="list card" ng-repeat="c in comments">
@@ -38,9 +33,11 @@
       </a>
       <p style="margin-left:75px;">{{c.content}}</p>
     </div>
+    <div style="margin-left:auto; margin-right:auto; max-width: 200px;">
+      <button ng-show="dataLength == limit" ng-click="loadMore()" class="button button-balanced button-block">load more ... </button>
+      <button ng-hide="dataLength == limit" class="button button-stable button-block" >no more</button>
+    </div>
   </div>
-<!-- <button class="button button-assertive" ng-click="loadMore()">load</button> -->
-<ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll>
-
+<!-- <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll> -->
 </ion-content>
 </ion-view>
