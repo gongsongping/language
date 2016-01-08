@@ -151,8 +151,11 @@ angular.module('starter.controllers', [])
   $scope.refresh = function() {
     $state.go($state.current, {}, {reload: true})
   }
-
+  $scope.audioPlay = function() {
+    document.getElementById('audio').play()
+  }
   $scope.sendPost = function() {
+    if (!$scope.temfiles[0] && !$scope.post.content){ $scope.empty = true ; return}
     if ($scope.temfiles[0]) {
       Qiniu.ngFileUp($scope.temfiles[0]).then(function (resp) {
         // console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data.key + JSON.stringify(resp.data))   // http://7xj5ck.com1.z0.glb.clouddn.com/2015-11-28T06%3A11%3A25.113Z
@@ -171,12 +174,50 @@ angular.module('starter.controllers', [])
       var post = new Post($scope.post)
       post.$save(function(data) {
         if ($scope.post.hidden){
-            $state.go($state.current, null, {reload: true})
+          $state.go($state.current, null, {reload: true})
         } else {
-            $state.go('tab.home', null,{ reload: true})
+          $state.go('tab.home', null,{ reload: true})
         }
       })
     }
+  }
+
+})
+
+.controller('AudioVideoCtrl', function($scope, $http, Qiniu, $state,$ionicHistory, $rootScope, $resource, Post, Qiniu) {
+  $scope.post = {content:''}; $scope.temfiles = []
+  $scope.listFiles = function(f) {
+    $scope.temfiles.push(f) // console.log($scope.cafe.content)
+  }
+  $scope.refresh = function() {
+    $state.go($state.current, {}, {reload: true})
+  }
+  $scope.audioPlay = function() {
+    document.getElementById('audio').play()
+      // document.getElementById('audio').src = $scope.temfile.src
+  }
+  $scope.onchangeUp = function(f) {
+    console.log(f)
+    // Qiniu.ngFileUp(f).then(function (resp) {
+    //   $scope.url = "http://7xj5ck.com1.z0.glb.clouddn.com/" + resp.data.key
+    //   document.getElementById('audio').src = $scope.url
+    // }, function (resp) {
+    //   console.log('Error status: ' + resp.status)
+    // }, function (evt) {
+    //   $scope.uppercent = parseInt(100.0 * evt.loaded / evt.total)
+    // })
+  }
+  $scope.setFile = function(element) {
+    $scope.currentFile = element.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(event) {
+      $scope.image_source = event.target.result
+      $scope.$apply()
+
+    }
+    // when the file is read it triggers the onload event above.
+    reader.readAsDataURL(element.files[0]);
   }
 
 })

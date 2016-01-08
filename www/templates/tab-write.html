@@ -1,38 +1,47 @@
 <ion-view hide-nav-bar="true" view-title="Write">
   <ion-content class="padding">
-  <div style="margin-left:auto; margin-right:auto; margin-top:10px; max-width: 700px;">
-    <label class="item item-input">
-      <textarea ng-model="post.content" placeholder="write something" cols="5" rows="5"></textarea>
-    </label>
-    <ion-checkbox ng-hide="file" ng-model="post.hidden">hide the post 隐藏博客</ion-checkbox>
-    <img id="photo" ngf-no-object-url="true" ngf-resize="{width: 700, height: 700, quality: 0.9}" ngf-src="temfile" width="100%" height="auto" />
-    <div ng-repeat="f in temfiles track by $index" >
-      <img  ngf-src="f" width="100%" height="auto" />
+    <div style="margin-left:auto; margin-right:auto; margin-top:10px; max-width: 700px;">
+      <a href="#/tab/write/audiovideo" class="button button-dark button-block">up audio video</a>
+      <label class="item item-input">
+        <textarea ng-model="post.content" placeholder="write something" cols="5" rows="5"></textarea>
+      </label>
+      <ion-checkbox ng-hide="file" ng-model="post.hidden">hide the post 隐藏博客</ion-checkbox>
+      <img id="photo" ngf-no-object-url="true" ngf-resize="{width: 700, height: 700, quality: 0.9}" ngf-src="temfile" width="100%" height="auto" />
+      <div ng-repeat="f in temfiles track by $index" >
+        <img  ngf-src="f" width="100%" height="auto" />
+      </div>
+      <div ng-show="uppercent" class="item range range-assertive">
+        <input type="range" ng-model="uppercent" name="volume" min="0" max="100" value="1">
+      </div>
+      <div >
+        <button ng-hide="file || post.hidden" ngf-select  ngf-change="listFiles(file)" ng-model="file" name="file"
+        accept="image/*" ngf-pattern="'image/*'"  ngf-resize="{width: 700, height: 700, quality: 0.9}" class="button button-stable button-block" >
+        click to choose photo
+        <i class="icon ion-images"></i>
+      </button>
     </div>
-    <div ng-show="uppercent" class="item range range-assertive">
-      <input type="range" ng-model="uppercent" name="volume" min="0" max="100" value="1">
-    </div>
-    <div >
-      <button ng-hide="file || post.hidden" ngf-select  ngf-change="listFiles(file)" ng-model="file" name="file" ngf-pattern="'image/*'"
-      accept="image/*"  ngf-resize="{width: 700, height: 700, quality: 0.9}" class="button button-stable button-block" >
-      click to choose photo
+    <button ng-show="file" ng-click="refresh()" class="button button-assertive"> reselect photo </button>
+    <button ng-show="empty && !file && !post.content" class="button button-assertive"> write something or up photo, can't be empty </button>
+    <button ng-click="sendPost()" class="button button-calm button-block"> submit photo </button>
+
+    <!-- <button  ngf-select ng-model="audio" ngf-pattern="'audio/*'" accept="audio/*" ngf-accept="'audio/*'" class="button button-stable button-block" >
+      click to choose audio
       <i class="icon ion-images"></i>
     </button>
-  </div>
-  <button ng-show="file" ng-click="refresh()" class="button button-assertive"> reselect photo </button>
-  <button ng-click="sendPost()" class="button button-calm button-block"> submit photo </button>
-
-  <div class="list card" ng-repeat="p in posts">
-    <div class="item item-body">
-      <p style="font-size:15px;" ng-bind-html="p.content"></p>
-      <p ng-bind="p.created_at | date:'yyyy-MM-dd'"></p>
+    <audio data-tap-disabled="true" id="audio" controls ngf-src="audio" type="audio/*"></audio>
+    <audio data-tap-disabled="true" controls src="https://ionic-audio.s3.amazonaws.com/Roxane.mp3"> test</audio>
+    <input type="file" name="name" value=""> -->
+    <div class="list card" ng-repeat="p in posts">
+      <div class="item item-body">
+        <p style="font-size:15px;" ng-bind-html="p.content"></p>
+        <p ng-bind="p.created_at | date:'yyyy-MM-dd'"></p>
+      </div>
+    </div>
+    <div style="margin-left:auto; margin-right:auto; max-width: 200px;">
+      <button ng-show="dataLength == limit" ng-click="loadMore()" class="button button-balanced button-block">load more ... </button>
+      <button ng-hide="dataLength == limit" class="button button-stable button-block" >no more</button>
     </div>
   </div>
-  <div style="margin-left:auto; margin-right:auto; max-width: 200px;">
-    <button ng-show="dataLength == limit" ng-click="loadMore()" class="button button-balanced button-block">load more ... </button>
-    <button ng-hide="dataLength == limit" class="button button-stable button-block" >no more</button>
-  </div>
-</div>
-<!-- <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll> -->
-</ion-content>
-</ion-view>
+      <!-- <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll> -->
+    </ion-content>
+  </ion-view>

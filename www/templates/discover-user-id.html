@@ -24,7 +24,7 @@
        <a href="#/tab/discover/posts/{{p.id}}">
          <div class="item item-body">
            <p ng-bind="p.created_at | date:'yyyy-MM-dd'"></p>
-           <img ng-f="p.url" ng-src="{{p.url}}" class="full-image" >
+           <img ng-if="p.url" ng-src="{{p.url}}" width="100" height="100" >
            <p style="font-size:100%;" ng-bind-html="p.content"></p>
            <p>
              <a href="#" class="subdued">{{p.comments_c}} comments</a>

@@ -15,7 +15,7 @@
       </a>
       <div class="item item-body">
         <a href="#/tab/home/posts/{{p.id}}">
-          <img ng-f="p.url" ng-src="{{p.url}}" class="full-image" >
+          <img ng-if="p.url" ng-src="{{p.url}}"  width="100" height="100" >
           <p style="font-size:100%;" ng-bind-html="p.content"></p>
         </a>
         <p>

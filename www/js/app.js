@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js ,'ngIOS9UIWebViewPatch'
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngResource','ngCordova','ngFileUpload']) //'firebase',
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','starter.directives','ngResource','ngCordova','ngFileUpload']) //'firebase',
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state, $resource) {
  // $rootScope.baseUrl = "http://localhost:3000"
@@ -136,6 +136,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','n
       'tab-write': {
         templateUrl: 'templates/tab-write.html',
         controller: 'WriteCtrl'
+      }
+    }
+  })
+  .state('tab.write-audiovideo', {
+    url: '/write/audiovideo',
+    // cache: false,
+    views: {
+      'tab-write': {
+        templateUrl: 'templates/audiovideo.html',
+        controller: 'AudioVideoCtrl'
       }
     }
   })
