@@ -186,9 +186,6 @@ angular.module('starter.controllers', [])
 
 .controller('AudioVideoCtrl', function($scope, $http, Qiniu, $state,$ionicHistory, $rootScope, $resource, Post, Qiniu) {
   $scope.post = {content:''}; $scope.temfiles = []
-  $scope.listFiles = function(f) {
-    $scope.temfiles.push(f) // console.log($scope.cafe.content)
-  }
   $scope.refresh = function() {
     $state.go($state.current, {}, {reload: true})
   }
@@ -207,23 +204,10 @@ angular.module('starter.controllers', [])
     //   $scope.uppercent = parseInt(100.0 * evt.loaded / evt.total)
     // })
   }
-  $scope.setFile = function(element) {
-    $scope.currentFile = element.files[0];
-    var reader = new FileReader();
-
-    reader.onload = function(event) {
-      $scope.image_source = event.target.result
-      $scope.$apply()
-
-    }
-    // when the file is read it triggers the onload event above.
-    reader.readAsDataURL(element.files[0]);
-  }
 
 })
 
 .controller('UserIdCtrl', function($scope, $stateParams, $http, $state, $rootScope, $window, Post, Comment, User, Follow) {
-  // $scope.user = User.get({id: $stateParams.uId})
   $scope.posts = []; $scope.isCurrentUser = true; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
     if ($scope.dataLength == $scope.limit) {
@@ -276,7 +260,7 @@ angular.module('starter.controllers', [])
       .$promise.then(function(data) {
         console.log(JSON.stringify(data))
         $scope.dataLength = data.comments.length
-        if ($scope.page == 0){ $scope.post = data.post }
+        if ($scope.page == 0){ $scope.p = data.post }
         if (data.comments.length == $scope.limit) {$scope.lastId = data.comments[$scope.limit-1].id}
         $scope.comments = $scope.comments.concat(data.comments)
         $scope.page += 1

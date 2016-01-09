@@ -8,16 +8,12 @@ The Friends service returns an array of friend data
   <ion-content class="padding">
     <div style="margin-left:auto; margin-right:auto; margin-top:10px; max-width: 700px;">
       <div class="list card" >
-        <a href="#/tab/home/users/{{post.user.id}}">
-          <div class="item item-avatar">
-            <img src="{{post.user.avatar}}">
-            <h2>{{post.user.name}}</h2>
-            <p ng-bind="post.created_at | date:'yyyy-MM-dd'"></p>
-          </div>
+        <a href="#/tab/home/users/{{p.user.id}}">
+          <div ng-include="'templates/_avatar.html'"></div>
         </a>
         <div class="item item-body">
-          <img ng-f="post.url" ng-src="{{post.url}}" class="full-image" >
-          <p style="margin-left:10px; font-size:100%;" ng-bind-html="post.content"></p>
+          <div ng-include="'templates/_img_l.html'"></div>
+          <div ng-include="'templates/_content.html'"></div>
           <!-- <a href="#" class="subdued">1 Like</a> -->
           <!-- <a href="#" class="subdued">{{p.comments_c}} comments</a> -->
         </div>
@@ -28,21 +24,14 @@ The Friends service returns an array of friend data
         <label class="item item-input">
           <textarea ng-model="comment.content" cols="3" rows="3"></textarea>
         </label>
-        <!-- <label class="item "> -->
         <input type="submit" value="comment" class="button button-small button-block button-calm">
-        <!-- </label> -->
-        <!-- <div> {{comment}}</div> -->
       </form>
     </div>
-    <div class="list card" ng-repeat="c in comments">
-      <a href="#/tab/home/users/{{c.user.id}}">
-        <div class="item item-avatar">
-          <img src="{{c.user.avatar}}">
-          <h2>{{c.user.name}}</h2>
-          <p ng-bind="c.created_at | date:'yyyy-MM-dd'"></p>
-        </div>
+    <div class="list card" ng-repeat="p in comments">
+      <a href="#/tab/home/users/{{p.user.id}}">
+        <div ng-include="'templates/_avatar.html'"></div>
       </a>
-      <p style="margin-left:75px;">{{c.content}}</p>
+      <div ng-include="'templates/_content.html'"></div>
     </div>
     <div style="margin-left:auto; margin-right:auto; max-width: 200px;">
       <button ng-show="dataLength == limit" ng-click="loadMore()" class="button button-balanced button-block">load more ... </button>
@@ -50,7 +39,7 @@ The Friends service returns an array of friend data
     </div>
   </div>
 <!-- <button class="button button-assertive" ng-click="loadMore()">load</button> -->
-<ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll>
+<!-- <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll> -->
 
 </ion-content>
 </ion-view>
