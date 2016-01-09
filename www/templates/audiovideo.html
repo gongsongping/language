@@ -9,14 +9,18 @@
         <input type="range" ng-model="uppercent" name="volume" min="0" max="100" value="1">
       </div>
       <!-- <button ng-click="sendPost()" class="button button-calm button-block"> submit photo </button> -->
-      <audio id="audio" ng-show="url" data-tap-disabled="true" controls src=""> qiniu url</audio>
+      <!-- <audio  ng-show="url" data-tap-disabled="true" controls src=""> qiniu url</audio> -->
       <button  ngf-select="onchangeUp(audio)" ng-model="audio" ngf-pattern="'audio/*,video/*'" accept="audio/*,video/*" ngf-accept="'audio/*,video/*'" class="button button-stable button-block" >
         click to choose audio/video
         <i class="icon ion-images"></i>
       </button>
-      <!-- <button class="button button-assertive" ng-click="audioPlay()">play</button> -->
-      <audio data-tap-disabled="true" controls ngf-src="audio" type="audio/*"></audio>
-      <video data-tap-disabled="true" controls ngf-src="audio" type="video/*"></video>
+      <button  ngf-select="onchangeUp(audio)" ng-model="audio" ngf-pattern="'audio/*'" accept="audio/*" ngf-accept="'audio/*'" class="button button-stable button-block" >
+        click to choose audio/ android
+        <i class="icon ion-images"></i>
+      </button>
+      <button class="button button-assertive" ng-click="audioPlay()">play</button>
+      <audio id="audio" data-tap-disabled="true" controls ngf-src="audio" type="audio/*" ></audio>
+      <video data-tap-disabled="true" controls ngf-src="audio" type="video/*" style="width:300px;height:30px;"></video>
 
       <!-- <input type="file" fileread="temfile.src"/>
       <input type="text" ng-model="temfile.src"/>
