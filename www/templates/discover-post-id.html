@@ -25,10 +25,7 @@
       </a>
       <div ng-include="'templates/_content.html'"></div>
     </div>
-    <div style="margin-left:auto; margin-right:auto; max-width: 200px;">
-      <button ng-show="dataLength == limit" ng-click="loadMore()" class="button button-balanced button-block">load more ... </button>
-      <button ng-hide="dataLength == limit" class="button button-stable button-block" >no more</button>
-    </div>
+    <div ng-include="'templates/_loadmore_btn.html'"></div>
   </div>
 <!-- <ion-infinite-scroll ng-if="dataLength == limit" on-infinite="loadMore()"></ion-infinite-scroll> -->
 </ion-content>

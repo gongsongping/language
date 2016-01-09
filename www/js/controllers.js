@@ -5,11 +5,11 @@ angular.module('starter.controllers', [])
   } else {
     $state.go('forms', {}, {reload: true})
   }
-  $scope.currentUser = Boolean($window.localStorage.token)
+  $rootScope.currentUser = Boolean($window.localStorage.token)
   // Form data for the login modal
   $scope.logout = function() {
     $window.localStorage.token = ''
-    $scope.currentUser = Boolean($window.localStorage.token)
+    $rootScope.currentUser = Boolean($window.localStorage.token)
     $http.defaults.headers.common['Authorization'] = ''
     console.log($window.localStorage.token)
     $rootScope.loginErr = ''
@@ -29,7 +29,7 @@ angular.module('starter.controllers', [])
     sess.$save(function(data) {
       if (data.token) {
         $window.localStorage.token = data.token
-        $scope.currentUser = Boolean($window.localStorage.token)
+        $rootScope.currentUser = Boolean($window.localStorage.token)
         $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
         console.log($window.localStorage.token)
         $state.go('tab.home', {}, {reload: true})
@@ -74,7 +74,7 @@ angular.module('starter.controllers', [])
       user.$save(function(data) {
         if (data.token) {
           $window.localStorage.token = data.token
-          $scope.currentUser = Boolean($window.localStorage.token)
+          $rootScope.currentUser = Boolean($window.localStorage.token)
           $http.defaults.headers.common['Authorization'] = "Token token=" + data.token
           console.log($window.localStorage.token)
           $state.go('tab.home', {}, {reload: true})
@@ -544,7 +544,7 @@ angular.module('starter.controllers', [])
 //   // alert(JSON.stringify(data))
 //   // alert(JSON.stringify(headers()))
 //   $window.localStorage.token = data.remId;
-//   $scope.currentUser = $window.localStorage.token
+//   $rootScope.currentUser = $window.localStorage.token
 //   $http.defaults.headers.common['Authorization'] = "Token token=" + data.remId
 //   console.log($window.localStorage.token);
 //   // window.location.reload()
