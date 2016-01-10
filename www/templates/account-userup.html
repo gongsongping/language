@@ -1,0 +1,36 @@
+<ion-view view-title="Signup">
+  <ion-content>
+    <div ng-show="userupErr" style="padding:10px; color:red;">{{signupErr}}</div>
+    <form >
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="userupData.name" >
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="userupData.email" >
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            select country
+          </div>
+          <button ng-click="modal.show()" class="button button-clear ">{{userupData.nationality}}</button>
+        </label>
+        <label class="item">
+          <button ngf-select="getFile(file)" ng-model="file" name="file" ngf-pattern="'image/*'"
+          accept="image/*"  ngf-resize="{width: 80, height: 80, quality: 0.9, ratio: '1:1', centerCrop: true}" class="button button-assertive button-small" >
+          click to set avatar
+        </button> <button class="button-icon button-clear icon ion-images"></button>
+        <img id="avatar" ngf-no-object-url="true" ngf-src="file" ngf-resize="{width: 80, height: 80, quality: 0.9, ratio: '1:1', centerCrop: true}" />
+        <img src="{{userupData.avatar}}" ngf-resize="{width: 80, height: 80, quality: 0.9, ratio: '1:1', centerCrop: true}" />
+      </label>
+      <a ng-hide="avt" class="button button-small button-assertive"> please select a picture </a>
+      <label class="item">
+        <button class="button button-block button-positive" ng-click="doUserup()">submit</button>
+      </label>
+    </div>
+    <!-- <div>{{userupData}}</div> -->
+  </form>
+</ion-content>
+</ion-view>

@@ -29,7 +29,7 @@
           <button ngf-select="getFile(file)" ng-model="file" name="file" ngf-pattern="'image/*'"
           accept="image/*"  ngf-resize="{width: 80, height: 80, quality: 0.9}" class="button button-assertive button-small" >
           click to set avatar
-          </button>
+          </button><button class="button-icon button-clear icon ion-images"></button>
           <img id="avatar" ngf-no-object-url="true" ngf-src="file" ngf-resize="{width: 80, height: 80, quality: 0.9}" />
         </label>
         <a ng-hide="avt" class="button button-small button-assertive"> please select a picture </a>

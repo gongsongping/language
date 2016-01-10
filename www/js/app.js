@@ -8,13 +8,13 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','starter.directives','ngResource','ngCordova','ngFileUpload']) //'firebase',
 
 .run(function($ionicPlatform, $http, $window, $rootScope, $state, $resource) {
- // $rootScope.baseUrl = "http://localhost:3000"
+  $rootScope.baseUrl = "http://localhost:3000"
   //  $rootScope.baseUrl = "http://162.243.143.15"
-   $rootScope.baseUrl = "http://changiif.com"
-   $resource('http://changiif.com/uptoken').get().$promise.then(function(data) {
-     $window.localStorage.qiniuToken = data.uptoken
-     console.log('qiniuT  ' + $window.localStorage.qiniuToken)
-   })
+  //  $rootScope.baseUrl = "http://changiif.com"
+  $resource('http://changiif.com/uptoken').get().$promise.then(function(data) {
+    $window.localStorage.qiniuToken = data.uptoken
+    console.log('qiniuT  ' + $window.localStorage.qiniuToken)
+  })
   console.log($window.localStorage.token)
   if ($window.localStorage.token) {
     $http.defaults.headers.common["Authorization"] = "Token token=" + $window.localStorage.token
@@ -55,7 +55,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
   // RestangularProvider.setBaseUrl("http://162.243.143.15/api")
   // RestangularProvider.setBaseUrl("http://localhost:3000/api")
   $ionicConfigProvider.tabs.position("bottom") //Places them at the bottom for all OS
-   $ionicConfigProvider.views.swipeBackEnabled(false)
+  $ionicConfigProvider.views.swipeBackEnabled(false)
   // $ionicConfigProvider.tabs.style("standard"); //Makes them all look the same across all OS
   $stateProvider
   // setup an abstract state for the tabs directive
@@ -101,38 +101,38 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
   })
 
   // Each tab has its own nav history stack:
-    .state('tab.home', {
-      url: '/home',
-      cache: false,
-      views: {
-        'tab-home': {
-          templateUrl: 'templates/tab-home.html',
-          controller: 'HomeCtrl'
-        }
+  .state('tab.home', {
+    url: '/home',
+    cache: false,
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/tab-home.html',
+        controller: 'HomeCtrl'
       }
-    })
+    }
+  })
 
-    .state('tab.home-user-id', {
-      url: '/home/users/:id',
-      // cache: false,
-      views: {
-        'tab-home': {
-          templateUrl: 'templates/home-user-id.html',
-          controller: 'UserIdCtrl'
-        }
+  .state('tab.home-user-id', {
+    url: '/home/users/:id',
+    // cache: false,
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/home-user-id.html',
+        controller: 'UserIdCtrl'
       }
-    })
+    }
+  })
 
-    .state('tab.home-post-id', {
-      url: '/home/posts/:id',
-      cache: false,
-      views: {
-        'tab-home': {
-          templateUrl: 'templates/home-post-id.html',
-          controller: 'PostIdCtrl'
-        }
+  .state('tab.home-post-id', {
+    url: '/home/posts/:id',
+    cache: false,
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/home-post-id.html',
+        controller: 'PostIdCtrl'
       }
-    })
+    }
+  })
 
   .state('tab.write', {
     url: '/write',
@@ -195,7 +195,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
         controller: 'AccountCtrl'
       }
     }
-  });
+  })
+
+  .state('tab.account-userup', {
+    url: '/account/userup',
+    cache: false,
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/account-userup.html',
+        controller: 'UserupCtrl'
+      }
+    }
+  })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');

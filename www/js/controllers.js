@@ -72,7 +72,7 @@ angular.module('starter.controllers', [])
     Qiniu.ngFileUp($scope.temfile).then(function (resp) {
       // console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data.key + JSON.stringify(resp.data))
       $scope.signupData.avatar = "http://7xj5ck.com1.z0.glb.clouddn.com/" + resp.data.key
-      var user = new User($scope.signupData)
+      var user = new User({user:$scope.signupData})
       user.$save(function(data) {
         if (data.token) {
           $window.localStorage.token = data.token
@@ -302,6 +302,66 @@ angular.module('starter.controllers', [])
 .controller('AccountCtrl', function($scope,$http,$cordovaCamera,$cordovaCapture) {
   $scope.settings = {
     enableFriends: true
+  }
+
+})
+
+.controller('UserupCtrl', function($scope, $http, $state, $rootScope, $window, $resource, Qiniu, $ionicModal, $timeout, Countries) {
+  $scope.userupData = {}
+  var Userup =  $resource($rootScope.baseUrl + '/api/userup/:id')
+  Userup.get({id:0}).$promise.then(function(data) {
+    // console.log(JSON.stringify(data))
+    $scope.userupData.name = data.user.name
+    $scope.userupData.nationality = data.user.nationality
+    $scope.userupData.email = data.user.email
+    $scope.userupData.avatar = data.user.avatar
+  })
+  $scope.countries = Countries.all()
+  $ionicModal.fromTemplateUrl('templates/countries.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal   // modal.show()
+  })
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove()
+  })
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  })
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  })
+  // $scope.userupData.nationality = "select country"
+  $scope.setCtry = function(index) {
+    $scope.userupData.nationality = $scope.countries[index].name
+    $scope.modal.hide()
+  }
+  $scope.getFile = function(f) {
+    $scope.temfile = f
+  }
+  $scope.avt = true
+  $scope.doUserup = function() {
+    // if (!$scope.temfile) {$scope.avt = false; return}
+    if ($scope.temfile){
+      Qiniu.ngFileUp($scope.temfile).then(function (resp) {
+        $scope.userupData.avatar = "http://7xj5ck.com1.z0.glb.clouddn.com/" + resp.data.key
+        var user = new Userup($scope.userupData)
+        user.$save(function(data) {
+          $state.go('tab.home', {}, {reload: true})
+          // $window.location.reload()
+        })
+      })
+    } else {
+      var user = new Userup($scope.userupData)
+      user.$save(function(data) {
+        $state.go('tab.home', {}, {reload: true})
+        // $window.location.reload()
+      })
+    }
   }
 
 })

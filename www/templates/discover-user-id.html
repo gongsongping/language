@@ -23,9 +23,9 @@
       <div class="list card" ng-repeat="p in posts">
        <a href="#/tab/discover/posts/{{p.id}}">
          <div class="item item-body">
-           <p ng-bind="p.created_at | date:'yyyy-MM-dd'"></p>
-           <div ng-include="'templates/_img_s.html'"></div>
+           <!-- <p ng-bind="p.created_at | date:'yyyy-MM-dd'"></p> -->
            <div ng-include="'templates/_content.html'"></div>
+           <div ng-include="'templates/_img_s.html'"></div>
            <p>
              <a href="#" class="subdued">{{p.comments_c}} comments</a>
            </p>
