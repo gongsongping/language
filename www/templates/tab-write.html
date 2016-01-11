@@ -6,11 +6,10 @@
         <textarea ng-model="post.content" placeholder="write something" cols="5" rows="5"></textarea>
       </label>
       <ion-checkbox ng-hide="file" ng-model="post.hidden">hide the post 隐藏博客</ion-checkbox>
-      <img id="photo" ngf-no-object-url="true" ngf-resize="{width: 700, height: 700, quality: 0.9}" ngf-src="temfile" width="100%" height="auto" />
       <div ng-repeat="f in temfiles track by $index" >
         <img  ngf-src="f" width="100%" height="auto" />
       </div>
-      <div ng-show="uppercent" class="item range range-assertive">
+      <div ng-if="uppercent" class="item range range-assertive">
         <input type="range" ng-model="uppercent" name="volume" min="0" max="100" value="1">
       </div>
       <div >
@@ -20,8 +19,8 @@
         <i class="icon ion-images"></i>
       </button>
     </div>
-    <button ng-show="file" ng-click="refresh()" class="button button-assertive"> reselect photo </button>
-    <button ng-show="empty && !file && !post.content" class="button button-assertive"> write something or up photo, can't be empty </button>
+    <button ng-if="file" ng-click="refresh()" class="button button-assertive"> reselect photo </button>
+    <button ng-if="empty && !file && !post.content" class="button button-assertive"> write something or up photo, can't be empty </button>
     <button ng-click="sendPost()" class="button button-calm button-block"> submit photo </button>
 
     <div class="list card" ng-repeat="p in posts">
