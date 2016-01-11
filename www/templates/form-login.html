@@ -1,7 +1,7 @@
 <ion-view view-title="Login">
   <ion-content>
     <div ng-show="loginErr" style="padding:10px; color:red;">{{loginErr}}</div>
-    <form ng-submit="doLogin()">
+    <form >
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Email</span>
@@ -12,7 +12,7 @@
           <input type="password" ng-model="loginData.password">
         </label>
         <label class="item">
-          <button class="button button-block button-calm" type="submit">Log in</button>
+          <button class="button button-block button-calm" ng-click="doLogin()">Log in</button>
         </label>
       </div>
       <!-- <div>{{loginData}}</div> -->

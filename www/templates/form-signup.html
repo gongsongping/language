@@ -1,7 +1,7 @@
 <ion-view view-title="Signup">
   <ion-content>
     <div ng-show="signupErr" style="padding:10px; color:red;">{{signupErr}}</div>
-    <form ng-submit="doSignup()">
+    <form >
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Name</span>
@@ -34,7 +34,7 @@
         </label>
         <a ng-hide="avt" class="button button-small button-assertive"> please select a picture </a>
         <label class="item">
-          <button class="button button-block button-calm" type="submit">sign up</button>
+          <button class="button button-block button-calm" ng-click="doSignup()">sign up</button>
         </label>
       </div>
       <!-- <div>{{signUpData}}</div> -->
