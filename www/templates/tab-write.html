@@ -6,12 +6,13 @@
         <textarea ng-model="post.content" placeholder="write something" cols="5" rows="5"></textarea>
       </label>
       <ion-checkbox ng-hide="file" ng-model="post.hidden">hide the post 隐藏博客</ion-checkbox>
-      <div ng-repeat="f in temfiles track by $index" >
-        <img  ngf-src="f" width="100%" height="auto" />
-      </div>
+      <!-- <div ng-repeat="f in temfiles track by $index" > -->
+        <img  ngf-src="file" width="100%" height="auto" />
+      <!-- </div> -->
       <div ng-if="uppercent" class="item range range-assertive">
         <input type="range" ng-model="uppercent" name="volume" min="0" max="100" value="1">
       </div>
+      <div ng-if="status"><p>{{status}} </p></div>
       <div >
         <button ng-hide="file || post.hidden" ngf-select  ngf-change="listFiles(file)" ng-model="file" name="file"
         accept="image/*" ngf-pattern="'image/*'"  ngf-resize="{width: 700, height: 700, quality: 0.9}" class="button button-stable button-block" >
