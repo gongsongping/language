@@ -126,7 +126,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('WriteCtrl', function($scope, $http, Qiniu, $state,$ionicHistory, $rootScope, $resource, Post, Qiniu) {
+.controller('WriteCtrl', function($scope, $http, $state,$ionicHistory, $rootScope, $resource, Post, Qiniu) {
   $rootScope.$broadcast('qiniuUPdate')
   var hiddenPo = $resource($rootScope.baseUrl + '/api/hiddenposts/:id')
   $scope.posts = []; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
@@ -186,7 +186,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('AudioVideoCtrl', function($scope, $http, Qiniu, $state,$ionicHistory, $rootScope, $resource, Post, Qiniu) {
+.controller('AudioVideoCtrl', function($scope, $http, $state, $ionicHistory, $rootScope, $resource, Post, Qiniu) {
   $scope.post = {content:''}; $scope.temfiles = []
   $scope.refresh = function() {
     $state.go($state.current, {}, {reload: true})

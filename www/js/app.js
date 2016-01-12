@@ -148,7 +148,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
   })
   .state('tab.write-audiovideo', {
     url: '/write/audiovideo',
-    // cache: false,
+    cache: false,
     views: {
       'tab-write': {
         templateUrl: 'templates/audiovideo.html',
