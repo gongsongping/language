@@ -9,6 +9,7 @@
       <!-- <div ng-repeat="f in temfiles track by $index" > -->
         <img  ngf-src="file" width="100%" height="auto" />
       <!-- </div> -->
+      <button ng-if="file" ng-click="refresh()" class="button button-assertive button-icon button-clear ion-trash-b" > reselect </button>
       <div ng-if="uppercent" class="item range range-assertive">
         <input type="range" ng-model="uppercent" name="volume" min="0" max="100" value="1">
       </div>
@@ -20,9 +21,8 @@
         <i class="icon ion-images"></i>
       </button>
     </div>
-    <button ng-if="file" ng-click="refresh()" class="button button-assertive"> reselect photo </button>
-    <button ng-if="empty && !file && !post.content" class="button button-assertive"> write something or up photo, can't be empty </button>
-    <button ng-click="sendPost()" class="button button-calm button-block"> submit photo </button>
+    <!-- <button ng-if="empty && !file && !post.content" class="button button-assertive"> write something or up photo, can't be empty </button> -->
+    <button ng-if="post.content || file" ng-click="sendPost()" class="button button-calm button-block"> submit photo </button>
 
     <div class="list card" ng-repeat="p in posts">
       <div class="item item-body">

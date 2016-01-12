@@ -19,10 +19,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User, Qiniu, $ionicModal, $timeout, $resource ,Countries) {
+  $rootScope.$broadcast('qiniuUPdate')
   $scope.loginData = {email: "lg1@gmail.com", password: "191954"}
-  $scope.signupData = {name:'lg1'}
-  $rootScope.loginErr = ''
-  $rootScope.signupErr = ''
+  $scope.signupData = {name:'lg1'}; $rootScope.loginErr = ''; $rootScope.signupErr = ''
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     var sess = new Session($scope.loginData)
@@ -128,6 +127,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('WriteCtrl', function($scope, $http, Qiniu, $state,$ionicHistory, $rootScope, $resource, Post, Qiniu) {
+  $rootScope.$broadcast('qiniuUPdate')
   var hiddenPo = $resource($rootScope.baseUrl + '/api/hiddenposts/:id')
   $scope.posts = []; $scope.page = 0; $scope.lastId = 0; $scope.limit = 5; $scope.dataLength = $scope.limit
   $scope.loadMore = function() {
@@ -157,7 +157,7 @@ angular.module('starter.controllers', [])
     document.getElementById('audio').play()
   }
   $scope.sendPost = function() {
-    if (!$scope.temfile && !$scope.post.content){ $scope.empty = true ; return}
+    // if (!$scope.temfile && !$scope.post.content){ $scope.empty = true ; return}
     if ($scope.temfile) {
       Qiniu.ngFileUp($scope.temfile).then(function (resp) {
         // console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data.key + JSON.stringify(resp.data))   // http://7xj5ck.com1.z0.glb.clouddn.com/2015-11-28T06%3A11%3A25.113Z
@@ -307,7 +307,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('UserupCtrl', function($scope, $http, $state, $rootScope, $window, $resource, Qiniu, $ionicModal, $timeout, Countries) {
-  $scope.userupData = {}
+  $rootScope.$broadcast('qiniuUPdate'); $scope.userupData = {}
   var Userup =  $resource($rootScope.baseUrl + '/api/userup/:id')
   Userup.get({id:0}).$promise.then(function(data) {
     // console.log(JSON.stringify(data))
