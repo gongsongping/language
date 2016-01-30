@@ -20,7 +20,7 @@ angular.module('starter.controllers', [])
 
 .controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User, Qiniu, $ionicModal, $timeout, $resource ,Countries) {
   $rootScope.$broadcast('qiniuUPdate')
-  $scope.loginData = {email: "lg1@gmail.com", password: "191954"}
+  $scope.loginData = {email: "lg1@gmail.com", password: ""}
   $scope.signupData = {name:'lg1'}; $rootScope.loginErr = ''; $rootScope.signupErr = ''
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
