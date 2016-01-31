@@ -2,13 +2,13 @@
   <ion-content class="padding">
     <div style="margin-left:auto; margin-right:auto; margin-top:10px; max-width: 700px;">
       <div class="row">
-        <div class="col col-40">
+        <div class="col col-60">
           <div class="item item-avatar">
              <img src="{{user.avatar}}" >
              <h2>{{user.name}}</h2>
           </div>
         </div>
-        <div class="col col-60">
+        <div class="col col-40">
           <div ng-hide="isCurrentUser">
             <div ng-show="foing">
               <button  class="button button-block  button-assertive button-outline"  ng-click="unfollow()">  unfollow  </button>

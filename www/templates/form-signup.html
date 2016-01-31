@@ -1,44 +1,42 @@
 <ion-view view-title="Signup">
   <ion-content>
-    <div ng-show="signupErr" style="padding:10px; color:red;">{{signupErr}}</div>
-    <form >
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Name</span>
-          <input type="text" ng-model="signupData.name" >
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Email</span>
-          <input type="text" ng-model="signupData.email" >
-        </label>
-        <label class="item item-input item-select">
-          <div class="input-label">
-            nationality
-          </div>
-          <button ng-click="modal.show()" class="button button-clear ">{{signupData.nationality}}</button>
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="signupData.password" >
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password Confirmation</span>
-          <input type="password" ng-model="signupData.password_confirmation" >
-        </label>
-        <label class="item">
-          <button ngf-select="getFile(file)" ng-model="file" name="file" ngf-pattern="'image/*'"
-          accept="image/*"  ngf-resize="{width: 80, height: 80, quality: 0.9}" class="button button-assertive button-small" >
-          click to set avatar
-          </button><button class="button-icon button-clear icon ion-images"></button>
-          <img id="avatar" ngf-no-object-url="true" ngf-src="file" ngf-resize="{width: 80, height: 80, quality: 0.9}" />
-        </label>
-        <a ng-hide="avt" class="button button-small button-assertive"> please select a picture </a>
-        <label class="item">
-          <button class="button button-block button-calm" ng-click="doSignup()">sign up</button>
-        </label>
-      </div>
-      <!-- <div>{{signUpData}}</div> -->
-    </form>
-    <!-- <img id="avatar" ngf-no-object-url="true" ngf-src="file" ngf-resize="{width: 40, height: 40, quality: 0.9}" /> -->
+    <div style="margin-left:auto; margin-right:auto; margin-top:10px; max-width: 700px;">
+      <div ng-show="signupErr" style="padding:10px; color:red;">{{signupErr}}</div>
+      <form >
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">Name</span>
+            <input type="text" ng-model="signupData.name" >
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="text" ng-model="signupData.email" >
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              nationality
+            </div>
+            <button ng-click="modal.show()" class="button button-clear ">{{signupData.nationality}}</button>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="signupData.password" >
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password Confirmation</span>
+            <input type="password" ng-model="signupData.password_confirmation" >
+          </label>
+          <label class="item">
+            <button ngf-select="getFile(file)" ng-model="file" name="file" ngf-pattern="'image/*'"
+            accept="image/*"  ngf-resize="{width: 80, height: 80, quality: 0.9}" class="button button-assertive button-small" >
+            click to set avatar
+            </button><button class="button-icon button-clear icon ion-images"></button>
+            <img id="avatar" ngf-no-object-url="true" ngf-src="file" ngf-resize="{width: 80, height: 80, quality: 0.9}" />
+          </label>
+          <a ng-hide="avt" class="button button-small button-assertive"> please select a picture </a>
+          <button class="button button-full button-calm" ng-click="doSignup()">sign up</button>
+        </div>
+      </form>
+    </div>
 </ion-content>
 </ion-view>

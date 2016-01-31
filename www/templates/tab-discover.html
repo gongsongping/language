@@ -4,6 +4,7 @@
     pulling-text="Pull to refresh..."
     on-refresh="doRefresh()">
   </ion-refresher>
+  <div ng-include="'templates/_slide_box.html'"></div>
   <div style="margin-left:auto; margin-right:auto; margin-top:10px; max-width: 700px;">
     <div class="list card" ng-repeat="p in posts">
       <a href="#/tab/discover/users/{{p.user.id}}">

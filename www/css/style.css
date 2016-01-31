@@ -29,7 +29,15 @@ a {
 /*.bar-footer{
   height:100px;
 }*/
+.slide-text {
+  text-align:center;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height:115%;
+  font-size:1.2em;
+}
+.container-center {
 
+}
 .item-body h1, .item-body h2, .item-body h3, .item-body h4, .item-body h5, .item-body h6, .item-body p {
     margin-top: 5px;
     margin-bottom: 5px; }

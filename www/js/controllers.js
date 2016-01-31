@@ -16,6 +16,7 @@ angular.module('starter.controllers', [])
     $rootScope.signupErr = ''
     $state.go('forms', {}, {reload: true})
   }
+
 })
 
 .controller('FormsCtrl', function($scope, $http, $state, $rootScope, $window, Session, User, Qiniu, $ionicModal, $timeout, $resource ,Countries) {
