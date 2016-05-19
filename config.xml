@@ -68,4 +68,7 @@
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
+  <chcp>
+    <config-file url="https://s3-ap-northeast-1.amazonaws.com/gongsongping/language/chcp.json" />
+  </chcp>
 </widget>
