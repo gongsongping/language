@@ -33,6 +33,23 @@ task :scp do
     queue 'nano index.html'
   end
 end
+
+task :scpapk do
+  to :before_hook do
+    queue 'cd platforms/android/build/outputs/apk'
+    queue 'mv android-debug.apk language.apk'
+    # queue 'tar -zcf language.tar.gz language.apk'
+    queue "scp language.apk gsp@changiif.com:#{deploy_to}"
+    # queue 'rm language.tar.gz'
+  end
+  queue 'ls'
+  # queue 'tar -zxvf www.tar.gz'
+  # queue 'rm www.tar.gz'
+  # in_directory "#{deploy_to}" do
+  #   queue %[tar -zxf changiif.tar.gz]
+  #   queue 'rm language.tar.gz'
+  # end
+end
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
 

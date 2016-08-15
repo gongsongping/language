@@ -23,6 +23,7 @@
     "org.apache.cordova.camera"
   ],
   "cordovaPlatforms": [
+    "android",
     "ios"
   ]
 }
